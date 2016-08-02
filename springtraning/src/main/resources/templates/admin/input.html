@@ -23,24 +23,41 @@
 					<select th:field="*{year}">
 						<option value=""></option>
 						<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}"></option>
-					</select>
-					<input type="number" th:field="*{year}" />年
-					<input type="number" th:field="*{month}" />月
-					<input type="number" th:field="*{day}" />日
+					</select>年
+					<select th:field="*{month}">
+						<option value=""></option>
+						<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}"></option>
+					</select>月
+					<select th:field="*{day}">
+						<option value=""></option>
+						<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}"></option>
+					</select>日
 				</td>
 			</tr>
 			<tr>
 				<td>開始時刻　※</td>
 				<td>
-					<input type="number" th:field="*{sthour}" />時
-					<input type="number" th:field="*{stmin}" />分
+					<select th:field="*{sthour}">
+						<option value=""></option>
+						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}"></option>
+					</select>時
+					<select th:field="*{stmin}">
+						<option value=""></option>
+						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}"></option>
+					</select>分
 				</td>
 			</tr>
 			<tr>
 				<td>終了時刻　※</td>
 				<td>
-					<input type="number" th:field="*{endhour}" />時
-					<input type="number" th:field="*{endmin}" />分
+					<select th:field="*{endhour}">
+						<option value=""></option>
+						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}"></option>
+					</select>時
+					<select th:field="*{endmin}">
+						<option value=""></option>
+						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}"></option>
+					</select>分
 				</td>
 			</tr>
 			<tr>

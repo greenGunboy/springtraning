@@ -13,13 +13,49 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class NewController {
 	
 	@ModelAttribute("yearList")
-	public List<String> setList() {
+	public List<String> setYear() {
 		List<String> yearList = new ArrayList<String>();
 		int cal = Calendar.getInstance().get(Calendar.YEAR);
 		for (int i =cal; i<= cal+5; i++) {
 			yearList.add(String.valueOf(i));
 		}
 		return yearList;
+	}
+	
+	@ModelAttribute("monthList")
+	public List<String> setMonth() {
+		List<String> monthList = new ArrayList<String>();
+		for (int i =1; i<= 12; i++) {
+			monthList.add(String.valueOf(i));
+		}
+		return monthList;
+	}
+	
+	@ModelAttribute("dayList")
+	public List<String> setDay() {
+		List<String> dayList = new ArrayList<String>();
+		for (int i =1; i<= 31; i++) {
+			dayList.add(String.valueOf(i));
+		}
+		return dayList;
+	}
+	
+	@ModelAttribute("hourList")
+	public List<String> setHour() {
+		List<String> hourList = new ArrayList<String>();
+		for (int i=10; i<=18; i++) {
+			hourList.add(String.format("%02d", i));
+		}
+		return hourList;
+	}
+	
+	@ModelAttribute("minList")
+	public List<String> setMin() {
+		List<String> minList = new ArrayList<String>();
+		for (int i=0; i<=59; i++) {
+			minList.add(String.format("%02d", i));
+		}
+		return minList;
 	}
 	
 	@ModelAttribute("courseForm")
