@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>講座登録</title>
+</head>
+<body>
+	<h1>講座登録</h1>
+	<p>※　は入力必須です。</p>
+	<form th:action="@{/admin/conf}" th:object="${courseForm}" method="post">
+		<table>
+			<tr>
+				<td>講座番号　※</td>
+				<td><input type="text" th:field="*{courseno}" /></td>
+			</tr>
+			<tr>
+				<td>講座名　※</td>
+				<td><input type="text" th:field="*{coursename}" /></td>
+			</tr>
+			<tr>
+				<td>講座開催日　※</td>
+				<td>
+					<select th:field="*{year}">
+						<option value=""></option>
+						<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}"></option>
+					</select>
+					<input type="number" th:field="*{year}" />年
+					<input type="number" th:field="*{month}" />月
+					<input type="number" th:field="*{day}" />日
+				</td>
+			</tr>
+			<tr>
+				<td>開始時刻　※</td>
+				<td>
+					<input type="number" th:field="*{sthour}" />時
+					<input type="number" th:field="*{stmin}" />分
+				</td>
+			</tr>
+			<tr>
+				<td>終了時刻　※</td>
+				<td>
+					<input type="number" th:field="*{endhour}" />時
+					<input type="number" th:field="*{endmin}" />分
+				</td>
+			</tr>
+			<tr>
+				<td>定員　※</td>
+				<td><input type="text" th:field="*{vacantseats}" />人</td>
+			</tr>
+		</table>
+		<input type="submit" name="back" value="戻る" />
+		<br />
+		<input type="submit" name="confirm" value="確認" />
+	</form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>登録確認画面</title>
+</head>
+<body>
+	<h1>登録確認</h1>
+	<form th:action = "@{/admin/end}" th:object = "${courseForm}" method = "post">
+		<table>
+			<tr>
+				<td>講座番号　※</td>
+				<td><span th:text="${courseno}"></span></td>
+			</tr>
+			<tr>
+				<td>講座名　※</td>
+				<td><span th:text="${coursename}"></span></td>
+			</tr>
+			<tr>
+				<td>講座開催日　※</td>
+				<td>
+					<span th:text="${year}"></span>年
+					<span th:text="${month}"></span>月
+					<span th:text="${day}"></span>日
+				</td>
+			</tr>
+			<tr>
+				<td>開始時刻　※</td>
+				<td>
+					<span th:text="${sthour}"></span>時
+					<span th:text="${stmin}"></span>分
+				</td>
+			</tr>
+			<tr>
+				<td>終了時刻　※</td>
+				<td>
+					<span th:text="${endhour}"></span>時
+					<span th:text="${endmin}"></span>分
+				</td>
+			</tr>
+			<tr>
+				<td>定員　※</td>
+				<td><span th:text="${vacantseats}"></span>人</td>
+			</tr>
+		</table>
+		<input type="submit" name="back" value="戻る" />
+		<br />
+		<input type="submit" name="register" value="登録" />
+	</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>登録完了画面</title>
+</head>
+<body>
+	<h1>登録完了</h1>
+	<p>講座登録を完了しました。</p>
+	<form th:action = "@{/admin/menu}" th:object = "${courseForm}" method = "post">
+		<input type="submit" name="toMenu" value="講座管理メニュー" /><br />
+		<br />
+		<input type="submit" name="addregister" value="追加登録" />
+	</form>
+</body>
+</html>
