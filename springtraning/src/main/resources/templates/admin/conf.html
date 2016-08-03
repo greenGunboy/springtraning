@@ -8,25 +8,29 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.conf}"></span></h1>
-		<p class="red">※　入力内容を確認してください。</p>
 		<form th:action = "@{/admin/end}" th:object = "${courseForm}" method = "post">
 			<table>
 				<tr>
-					<td class="blue"><span th:text="#{label.courseno}"></span>　<span class="red">※</span></td>
+					<td colspan="2">
+						<h3 class="red">※　入力内容を確認してください。</h3>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.courseno}"></span></td>
 					<td>
 						<span th:text="*{courseno}"></span>
 						<input type="hidden" th:field="*{courseno}"	/>
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.coursename}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.coursename}"></span></td>
 					<td>
 						<span th:text="*{coursename}"></span>
 						<input type="hidden" th:field="*{coursename}"	/>
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.thedate}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.thedate}"></span></td>
 					<td>
 						<span th:text="*{year}"></span><span th:text="#{label.year}" class="blue"></span>
 						<span th:text="*{month}"></span><span th:text="#{label.month}" class="blue"></span>
@@ -37,7 +41,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.starttime}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.starttime}"></span></td>
 					<td>
 						<span th:text="*{sthour}"></span><span th:text="#{label.hour}" class="blue"></span>
 						<span th:text="*{stmin}"></span><span th:text="#{label.min}" class="blue"></span>
@@ -46,7 +50,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.endtime}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.endtime}"></span></td>
 					<td>
 						<span th:text="*{endhour}"></span><span th:text="#{label.hour}" class="blue"></span>
 						<span th:text="*{endmin}"></span><span th:text="#{label.min}" class="blue"></span>
@@ -55,7 +59,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.vacantseats}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.vacantseats}"></span></td>
 					<td>
 						<span th:text="*{vacantseats}"></span><span th:text="#{label.person}" class="blue"></span>
 						<input type="hidden" th:field="*{vacantseats}"	/>

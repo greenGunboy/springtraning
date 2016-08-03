@@ -8,20 +8,28 @@
 <body>
 	<div class="box">
 	<h1 class="blue"><span th:text="#{title.input}"></span></h1>
-		<p class="red">※　は入力必須です。</p>
 		<form th:action="@{/admin/conf}" th:object="${courseForm}" method="post">
 		
-			<p th:if = "${#fields.hasErrors('all')}"></p>
-			<p th:errors = "*{all}" class = "error-message">error!</p>
 			
 			<table>
 				<tr>
+					<td>
+						<h3 class="red">※　は入力必須です。</h3>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p th:if = "${#fields.hasErrors('all')}"></p>
+						<p th:errors = "*{all}" class = "error-message">error!</p>
+					</td>
+				</tr>
+				<tr>
 					<td class="blue"><span th:text="#{label.courseno}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" th:field="*{courseno}" th:value="*{courseno}" th:errorclass = "error-input" /></td>
+					<td><input type="text" maxlength="4" th:field="*{courseno}" th:value="*{courseno}" th:errorclass = "error-input" /></td>
 				</tr>
 				<tr>
 					<td class="blue"><span th:text="#{label.coursename}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" th:field="*{coursename}" th:errorclass = "error-input" /></td>
+					<td><input type="text" maxlength="40" th:field="*{coursename}" th:errorclass = "error-input" /></td>
 				</tr>
 				<tr>
 					<td class="blue"><span th:text="#{label.thedate}" class="blue"></span>　<span class="red">※</span></td>

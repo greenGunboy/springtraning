@@ -80,6 +80,11 @@ public class CourseController {
 		return "admin/end";
 	}
 	
+	@RequestMapping(value = "/admin/input")
+	public String input() {
+		return "admin/input";
+	}
+	
 	@RequestMapping(value="/admin/conf", params="back")
 	public String inputToMenuPage() {
 		return "admin/menu";
