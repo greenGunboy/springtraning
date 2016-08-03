@@ -45,5 +45,4 @@ public class CourseInfo {
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
-	
 }

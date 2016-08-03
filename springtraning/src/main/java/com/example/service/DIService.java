@@ -12,6 +12,7 @@ public class DIService {
 	@Autowired
 	private CourseInfoMapper mapper;
 	
+	// 入力された講座情報をDBに登録するメソッド
 	public void insertCourseInfo(CourseInfo courseInfo) {
 		mapper.insert(courseInfo);
 	}

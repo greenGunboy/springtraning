@@ -85,14 +85,17 @@ public class CourseForm {
 	public void setEndmin(String endmin) {
 		this.endmin = endmin;
 	}
+	// insert用に"0000-00-00"の形にフォーマット
 	public String getThedate() {
 		this.thedate = year + "-" + String.format("%02d", Integer.valueOf(month)) + "-" + String.format("%02d", Integer.valueOf(day));
 		return thedate;
 	}
+	// insert用に"00:00"の形にフォーマット
 	public String getStarttime() {
 		this.starttime = sthour + ":" + stmin;
 		return starttime;
 	}
+	// insert用に"00:00"の形にフォーマット
 	public String getEndtime() {
 		this.endtime = endhour + ":" + endmin;
 		return endtime;
