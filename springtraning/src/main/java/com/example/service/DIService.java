@@ -1,19 +1,19 @@
 package com.example.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.domain.CourseInfo;
+import com.example.persistence.CourseInfoMapper;
 
 @Service
 public class DIService {
 
-	public String getData(String year, String month, String day) {
-		return year + month + day;
+	@Autowired
+	private CourseInfoMapper mapper;
+	
+	public void insertCourseInfo(CourseInfo courseInfo) {
+		mapper.insert(courseInfo);
 	}
 	
-	public String getStTime (String sthour, String stmin) {
-		return String.format("%02d:%02d", sthour, stmin);
-	}
-	
-	public String getEndTime (String endhour, String endmin) {
-		return String.format("%02d:%02d", endhour, endmin);
-	}
 }

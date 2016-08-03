@@ -10,37 +10,53 @@
 		<table>
 			<tr>
 				<td>講座番号　※</td>
-				<td><span th:text="${courseno}"></span></td>
+				<td>
+					<span th:text="*{courseno}"></span>
+					<input type="hidden" th:field="*{courseno}"	/>
+				</td>
 			</tr>
 			<tr>
 				<td>講座名　※</td>
-				<td><span th:text="${coursename}"></span></td>
+				<td>
+					<span th:text="*{coursename}"></span>
+					<input type="hidden" th:field="*{coursename}"	/>
+				</td>
 			</tr>
 			<tr>
 				<td>講座開催日　※</td>
 				<td>
-					<span th:text="${year}"></span>年
-					<span th:text="${month}"></span>月
-					<span th:text="${day}"></span>日
+					<span th:text="*{year}"></span>年
+					<span th:text="*{month}"></span>月
+					<span th:text="*{day}"></span>日
+					<input type="hidden" th:field="*{year}"	/>
+					<input type="hidden" th:field="*{month}"	/>
+					<input type="hidden" th:field="*{day}"	/>
 				</td>
 			</tr>
 			<tr>
 				<td>開始時刻　※</td>
 				<td>
-					<span th:text="${sthour}"></span>時
-					<span th:text="${stmin}"></span>分
+					<span th:text="*{sthour}"></span>時
+					<span th:text="*{stmin}"></span>分
+					<input type="hidden" th:field="*{sthour}"	/>
+					<input type="hidden" th:field="*{stmin}"	/>
 				</td>
 			</tr>
 			<tr>
 				<td>終了時刻　※</td>
 				<td>
-					<span th:text="${endhour}"></span>時
-					<span th:text="${endmin}"></span>分
+					<span th:text="*{endhour}"></span>時
+					<span th:text="*{endmin}"></span>分
+					<input type="hidden" th:field="*{endhour}"	/>
+					<input type="hidden" th:field="*{endmin}"	/>
 				</td>
 			</tr>
 			<tr>
 				<td>定員　※</td>
-				<td><span th:text="${vacantseats}"></span>人</td>
+				<td>
+					<span th:text="*{vacantseats}"></span>人
+					<input type="hidden" th:field="*{vacantseats}"	/>
+				</td>
 			</tr>
 		</table>
 		<input type="submit" name="back" value="戻る" />

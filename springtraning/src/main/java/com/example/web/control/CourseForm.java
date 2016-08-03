@@ -1,17 +1,25 @@
 package com.example.web.control;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class CourseForm {
 	
+	@NotEmpty
 	private String courseno;
+	@NotEmpty
 	private String coursename;
 	private String year;
 	private String month;
 	private String day;
-	private int vacantseats;
+	@NotEmpty
+	private String vacantseats;
 	private String sthour;
 	private String stmin;
 	private String endhour;
 	private String endmin;
+	private String thedate;
+	private String starttime;
+	private String endtime;
 	
 	public String getCourseno() {
 		return courseno;
@@ -43,10 +51,10 @@ public class CourseForm {
 	public void setDay(String day) {
 		this.day = day;
 	}
-	public int getVacantseats() {
+	public String getVacantseats() {
 		return vacantseats;
 	}
-	public void setVacantseats(int vacantseats) {
+	public void setVacantseats(String vacantseats) {
 		this.vacantseats = vacantseats;
 	}
 	public String getSthour() {
@@ -72,6 +80,18 @@ public class CourseForm {
 	}
 	public void setEndmin(String endmin) {
 		this.endmin = endmin;
+	}
+	public String getThedate() {
+		this.thedate = year + "-" + String.format("%02d", Integer.valueOf(month)) + "-" + String.format("%02d", Integer.valueOf(day));
+		return thedate;
+	}
+	public String getStarttime() {
+		this.starttime = sthour + ":" + stmin;
+		return starttime;
+	}
+	public String getEndtime() {
+		this.endtime = endhour + ":" + endmin;
+		return endtime;
 	}
 	
 }

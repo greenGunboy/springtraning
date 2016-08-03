@@ -2,20 +2,25 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<title>講座登録</title>
 </head>
 <body>
 	<h1>講座登録</h1>
 	<p>※　は入力必須です。</p>
 	<form th:action="@{/admin/conf}" th:object="${courseForm}" method="post">
+	
+		<p th:if = "${#fields.hasErrors('all')}">エラーが発生しました！</p>
+		<p th:errors = "*{all}" class = "error-message">error!</p>
+		
 		<table>
 			<tr>
 				<td>講座番号　※</td>
-				<td><input type="text" th:field="*{courseno}" /></td>
+				<td><input type="text" th:field="*{courseno}" th:errorclass = "error-input" /></td>
 			</tr>
 			<tr>
 				<td>講座名　※</td>
-				<td><input type="text" th:field="*{coursename}" /></td>
+				<td><input type="text" th:field="*{coursename}" th:errorclass = "error-input" /></td>
 			</tr>
 			<tr>
 				<td>講座開催日　※</td>
@@ -62,7 +67,7 @@
 			</tr>
 			<tr>
 				<td>定員　※</td>
-				<td><input type="text" th:field="*{vacantseats}" />人</td>
+				<td><input type="text" th:field="*{vacantseats}" th:errorclass = "error-input" />人</td>
 			</tr>
 		</table>
 		<input type="submit" name="back" value="戻る" />
