@@ -2,15 +2,21 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<title>講座管理メニュー</title>
 </head>
 <body>
-	<h1>講座管理メニュー</h1>
-	<p>「講座登録」　または、「講座修正削除」ボタンを押してください。</p>
-	<form th:action="@{/admin/input}" method="post">
-		<input type="submit" name="courseregister" value="講座登録" />
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.menu}"></span></h1>
+		<h3>「講座登録」　または、「講座修正削除」ボタンを押してください。</h3>
 		<br />
-		<input type="submit" name="courseedit" value="講座修正削除" />
-	</form>
+		<br />
+		<br />
+		<form th:action="@{/admin/input}" method="post">
+			<input type="submit" class="btn" name="courseregister" value="講座登録" /><br />
+			<br />
+			<input type="submit" class="btn" name="courseedit" value="講座修正削除" />
+		</form>
+	</div>
 </body>
 </html>

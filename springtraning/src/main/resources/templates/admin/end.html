@@ -2,15 +2,17 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<title>登録完了画面</title>
 </head>
 <body>
-	<h1>登録完了</h1>
-	<p>講座登録を完了しました。</p>
-	<form th:action = "@{/admin/menu}" th:object = "${courseForm}" method = "post">
-		<input type="submit" name="toMenu" value="講座管理メニュー" /><br />
-		<br />
-		<input type="submit" name="addregister" value="追加登録" />
-	</form>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.end}"></span></h1>
+		<p class="blue">講座登録を完了しました。</p>
+		<form th:action = "@{/admin/menu}" th:object = "${courseForm}" method = "post">
+			<input type="submit" class="btn" name="toMenu" value="講座管理メニュー" />
+			<input type="submit" class="btn" name="addregister" value="追加登録" />
+		</form>
+	</div>
 </body>
 </html>

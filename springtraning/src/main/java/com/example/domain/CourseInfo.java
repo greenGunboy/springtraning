@@ -5,7 +5,7 @@ public class CourseInfo {
 	private String courseno;
 	private String coursename;
 	private String thedate;
-	private String vacantseats;
+	private Integer vacantseats;
 	private String starttime;
 	private String endtime;
 	
@@ -27,10 +27,10 @@ public class CourseInfo {
 	public void setThedate(String thedate) {
 		this.thedate = thedate;
 	}
-	public String getVacantseats() {
+	public Integer getVacantseats() {
 		return vacantseats;
 	}
-	public void setVacantseats(String vacantseats) {
+	public void setVacantseats(Integer vacantseats) {
 		this.vacantseats = vacantseats;
 	}
 	public String getStarttime() {

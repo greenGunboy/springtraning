@@ -15,7 +15,7 @@ public class CourseForm {
 	private String month;
 	private String day;
 	@NotNull
-	@Range(min=1, max=50, message="{0}は、{min}以上、{max}以下で入力してください。")
+	@Range(min=1, max=50, message="「{0}」は、{min}以上、{max}以下で入力してください。")
 	private Integer vacantseats;
 	private String sthour;
 	private String stmin;

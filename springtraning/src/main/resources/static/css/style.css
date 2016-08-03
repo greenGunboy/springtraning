@@ -6,4 +6,36 @@
 
 .error-message {
     color: #FF0000;
+    background-color: #ffff80;
+    width: 450px;
+    font-weight:bold;
+    text-align : left;
+    border :2px;
+	border-color:#000000;
+	border-style:ridge;
+	padding:5px;
+}
+
+.blue {
+	color: blue;
+}
+
+.red {
+	color: red;
+}
+
+.btn {
+	width :150px;
+	padding:5px;
+	border :2px;
+	border-color:#000000;
+	border-radius: 5px;
+	border-style:ridge;
+	color: blue;
+	font-weight:bold;
+	background-color: #ceffce;
+}
+
+.box {
+	text-align : center;
 }

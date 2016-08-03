@@ -2,66 +2,69 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<title>登録確認画面</title>
 </head>
 <body>
-	<h1>登録確認</h1>
-	<form th:action = "@{/admin/end}" th:object = "${courseForm}" method = "post">
-		<table>
-			<tr>
-				<td>講座番号　※</td>
-				<td>
-					<span th:text="*{courseno}"></span>
-					<input type="hidden" th:field="*{courseno}"	/>
-				</td>
-			</tr>
-			<tr>
-				<td>講座名　※</td>
-				<td>
-					<span th:text="*{coursename}"></span>
-					<input type="hidden" th:field="*{coursename}"	/>
-				</td>
-			</tr>
-			<tr>
-				<td>講座開催日　※</td>
-				<td>
-					<span th:text="*{year}"></span>年
-					<span th:text="*{month}"></span>月
-					<span th:text="*{day}"></span>日
-					<input type="hidden" th:field="*{year}"	/>
-					<input type="hidden" th:field="*{month}"	/>
-					<input type="hidden" th:field="*{day}"	/>
-				</td>
-			</tr>
-			<tr>
-				<td>開始時刻　※</td>
-				<td>
-					<span th:text="*{sthour}"></span>時
-					<span th:text="*{stmin}"></span>分
-					<input type="hidden" th:field="*{sthour}"	/>
-					<input type="hidden" th:field="*{stmin}"	/>
-				</td>
-			</tr>
-			<tr>
-				<td>終了時刻　※</td>
-				<td>
-					<span th:text="*{endhour}"></span>時
-					<span th:text="*{endmin}"></span>分
-					<input type="hidden" th:field="*{endhour}"	/>
-					<input type="hidden" th:field="*{endmin}"	/>
-				</td>
-			</tr>
-			<tr>
-				<td>定員　※</td>
-				<td>
-					<span th:text="*{vacantseats}"></span>人
-					<input type="hidden" th:field="*{vacantseats}"	/>
-				</td>
-			</tr>
-		</table>
-		<input type="submit" name="back" value="戻る" />
-		<br />
-		<input type="submit" name="register" value="登録" />
-	</form>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.conf}"></span></h1>
+		<p class="red">※　入力内容を確認してください。</p>
+		<form th:action = "@{/admin/end}" th:object = "${courseForm}" method = "post">
+			<table>
+				<tr>
+					<td class="blue"><span th:text="#{label.courseno}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{courseno}"></span>
+						<input type="hidden" th:field="*{courseno}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.coursename}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{coursename}"></span>
+						<input type="hidden" th:field="*{coursename}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.thedate}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{year}"></span><span th:text="#{label.year}" class="blue"></span>
+						<span th:text="*{month}"></span><span th:text="#{label.month}" class="blue"></span>
+						<span th:text="*{day}"></span><span th:text="#{label.day}" class="blue"></span>
+						<input type="hidden" th:field="*{year}"	/>
+						<input type="hidden" th:field="*{month}"	/>
+						<input type="hidden" th:field="*{day}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.starttime}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{sthour}"></span><span th:text="#{label.hour}" class="blue"></span>
+						<span th:text="*{stmin}"></span><span th:text="#{label.min}" class="blue"></span>
+						<input type="hidden" th:field="*{sthour}"	/>
+						<input type="hidden" th:field="*{stmin}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.endtime}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{endhour}"></span><span th:text="#{label.hour}" class="blue"></span>
+						<span th:text="*{endmin}"></span><span th:text="#{label.min}" class="blue"></span>
+						<input type="hidden" th:field="*{endhour}"	/>
+						<input type="hidden" th:field="*{endmin}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.vacantseats}"></span>　<span class="red">※</span></td>
+					<td>
+						<span th:text="*{vacantseats}"></span><span th:text="#{label.person}" class="blue"></span>
+						<input type="hidden" th:field="*{vacantseats}"	/>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" class="btn" name="back" value="戻る" />
+			<input type="submit" class="btn" name="register" value="登録" />
+		</form>
+	</div>
 </body>
 </html>
