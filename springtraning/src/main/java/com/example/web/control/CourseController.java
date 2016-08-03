@@ -93,6 +93,28 @@ public class CourseController {
 	@RequestMapping(value="/admin/conf", params="confirm", method=RequestMethod.POST)
 	public String inputToConfPage(@Validated @ModelAttribute("courseForm") CourseForm form, 
 			BindingResult result) {
+		// 講座番号の重複チェック
+		if(service.isDuplicateCourseno(form.getCourseno())) {
+			result.rejectValue("courseno", "errors.duplicate.courseno");
+		}
+		//　「講座開催日」の「年」「月」「日」の未記入チェック
+		if(form.getYear().equals("") || form.getMonth().equals("") || form.getDay().equals("")) {
+			result.reject("errors.required.date");
+		}
+		// 「開始時刻」の「時」「分」の未記入チェック
+		if(form.getSthour().equals("") || form.getStmin().equals("")) {
+			result.reject("errors.required.stime");
+		}
+		// 「終了時刻」の「時」「分」の未記入チェック
+		if(form.getEndhour().equals("") || form.getEndmin().equals("")) {
+			result.reject("errors.required.etime");
+		}
+		// 「開始時刻」が「終了時刻」より後ではないかチェック
+		if(!form.getSthour().equals("") || !form.getStmin().equals("") || !form.getEndhour().equals("") || !form.getEndmin().equals("")) {
+			if(Integer.parseInt(form.getSthour() + form.getStmin()) >= Integer.parseInt(form.getEndhour() + form.getEndmin())) {
+				result.reject("errors.contradiction.time");
+			}
+		}
 		if(result.hasErrors()) {
 			return "admin/input";
 		}

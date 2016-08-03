@@ -8,4 +8,8 @@
         INSERT INTO course(courseno, coursename, thedate, vacantseats, starttime, endtime, inpdate) 
         VALUES (#{courseno}, #{coursename}, #{thedate}, #{vacantseats}, #{starttime}, #{endtime}, NOW())
     </insert>
+    
+    <select id="getCountByCourseno" resultType="int">
+    	SELECT COUNT(*) FROM course WHERE courseno = #{courseno}
+    </select>
 </mapper>

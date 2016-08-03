@@ -16,4 +16,10 @@ public class DIService {
 		mapper.insert(courseInfo);
 	}
 	
+	// 講座番号重複チェック処理メソッド
+	public boolean isDuplicateCourseno(String courseno) {
+		int count = mapper.getCountByCourseno(courseno);
+		return count == 0 ? false:true;
+	}
+	
 }

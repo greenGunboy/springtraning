@@ -27,15 +27,15 @@
 				<td>
 					<select th:field="*{year}">
 						<option value=""></option>
-						<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>年
 					<select th:field="*{month}">
 						<option value=""></option>
-						<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>月
 					<select th:field="*{day}">
 						<option value=""></option>
-						<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>日
 				</td>
 			</tr>
@@ -44,11 +44,11 @@
 				<td>
 					<select th:field="*{sthour}">
 						<option value=""></option>
-						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>時
 					<select th:field="*{stmin}">
 						<option value=""></option>
-						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>分
 				</td>
 			</tr>
@@ -57,11 +57,11 @@
 				<td>
 					<select th:field="*{endhour}">
 						<option value=""></option>
-						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>時
 					<select th:field="*{endmin}">
 						<option value=""></option>
-						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}"></option>
+						<option th:each="i : ${minList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
 					</select>分
 				</td>
 			</tr>
