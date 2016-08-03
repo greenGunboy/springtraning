@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
@@ -8,7 +8,7 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.conf}"></span></h1>
-		<form th:action = "@{/admin/end}" th:object = "${courseForm}" method = "post">
+		<form th:action="@{/admin/end}" th:object="${courseForm}" method="post">
 			<table>
 				<tr>
 					<td colspan="2">
@@ -36,8 +36,8 @@
 						<span th:text="*{month}"></span><span th:text="#{label.month}" class="blue"></span>
 						<span th:text="*{day}"></span><span th:text="#{label.day}" class="blue"></span>
 						<input type="hidden" th:field="*{year}"	/>
-						<input type="hidden" th:field="*{month}"	/>
-						<input type="hidden" th:field="*{day}"	/>
+						<input type="hidden" th:field="*{month}" />
+						<input type="hidden" th:field="*{day}" />
 					</td>
 				</tr>
 				<tr>
@@ -45,8 +45,8 @@
 					<td>
 						<span th:text="*{sthour}"></span><span th:text="#{label.hour}" class="blue"></span>
 						<span th:text="*{stmin}"></span><span th:text="#{label.min}" class="blue"></span>
-						<input type="hidden" th:field="*{sthour}"	/>
-						<input type="hidden" th:field="*{stmin}"	/>
+						<input type="hidden" th:field="*{sthour}" />
+						<input type="hidden" th:field="*{stmin}" />
 					</td>
 				</tr>
 				<tr>
@@ -54,15 +54,15 @@
 					<td>
 						<span th:text="*{endhour}"></span><span th:text="#{label.hour}" class="blue"></span>
 						<span th:text="*{endmin}"></span><span th:text="#{label.min}" class="blue"></span>
-						<input type="hidden" th:field="*{endhour}"	/>
-						<input type="hidden" th:field="*{endmin}"	/>
+						<input type="hidden" th:field="*{endhour}" />
+						<input type="hidden" th:field="*{endmin}" />
 					</td>
 				</tr>
 				<tr>
 					<td class="blue"><span th:text="#{label.vacantseats}"></span></td>
 					<td>
 						<span th:text="*{vacantseats}"></span><span th:text="#{label.person}" class="blue"></span>
-						<input type="hidden" th:field="*{vacantseats}"	/>
+						<input type="hidden" th:field="*{vacantseats}" />
 					</td>
 				</tr>
 			</table>

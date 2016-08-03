@@ -22,7 +22,8 @@ public class CourseController {
 	private DIService service;
 	
 /*************************表示の際に使う値***************************/
-	// selectタグで現在年から5年後までを表示
+	// selectタグで年を表示
+	// 現在年から5年後までを表示
 	@ModelAttribute("yearList")
 	public List<String> setYear() {
 		List<String> yearList = new ArrayList<String>();
@@ -162,6 +163,5 @@ public class CourseController {
 	@RequestMapping(value="/admin/menu", params="addregister")
 	public String endToNextPage() {
 		return "admin/input";
-	}
-	
+	}	
 }

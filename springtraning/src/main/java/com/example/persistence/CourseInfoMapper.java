@@ -7,4 +7,5 @@ public interface CourseInfoMapper {
 	public void insert(CourseInfo courseInfo);
 	
 	public int getCountByCourseno(String courseno);
+	
 }

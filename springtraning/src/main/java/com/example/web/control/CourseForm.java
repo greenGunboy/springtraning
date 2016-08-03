@@ -100,5 +100,4 @@ public class CourseForm {
 		this.endtime = endhour + ":" + endmin;
 		return endtime;
 	}
-	
 }

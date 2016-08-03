@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
@@ -7,10 +7,8 @@
 </head>
 <body>
 	<div class="box">
-	<h1 class="blue"><span th:text="#{title.input}"></span></h1>
+		<h1 class="blue"><span th:text="#{title.input}"></span></h1>
 		<form th:action="@{/admin/conf}" th:object="${courseForm}" method="post">
-		
-			
 			<table>
 				<tr>
 					<td>
