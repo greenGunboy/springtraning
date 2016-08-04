@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.CourseInfo;
-import com.example.service.DIService;
+import com.example.service.CourseResisterService;
 
 @Controller
 public class CourseController {
 	
 	@Autowired
-	private DIService service;
+	private CourseResisterService service;
 	
 /*************************表示の際に使う値***************************/
 	// selectタグで年を表示
@@ -140,11 +140,15 @@ public class CourseController {
 	
 	// conf.htmlでの「登録」ボタン押下時処理
 	@RequestMapping(value="/admin/end", params="register")
-	public String confToendPage(@ModelAttribute("courserForm") CourseForm form) {
+	public String confToendPage(@ModelAttribute("courserForm") CourseForm form) throws Exception {
 		CourseInfo courseInfo = new CourseInfo();
 		BeanUtils.copyProperties(form, courseInfo);
-		service.insertCourseInfo(courseInfo);
-		return "redirect:/admin/end?finish";
+		boolean flg = service.insertCourseInfo(courseInfo);
+		if(flg) {
+			return "redirect:/admin/end?finish";
+		} else {
+			return "admin/error";
+		}
 	}
 	
 	// リダイレクト後処理

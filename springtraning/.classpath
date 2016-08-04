@@ -27,5 +27,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/takahashi/Downloads/jmockit-1.20.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/takahashi/Downloads/dbunit-2.5.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/takahashi/Downloads/slf4j-api-1.7.21-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/takahashi/Downloads/slf4j-nop-1.7.21-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/takahashi/Downloads/mysql-connector-java-5.1.10-bin.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
