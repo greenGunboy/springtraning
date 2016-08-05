@@ -29,13 +29,13 @@ public class Selenium {
 
   @Before
   public void setUp() throws Exception {
-	File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-	FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-	FirefoxProfile firefoxProfile = new FirefoxProfile();
-	driver = new FirefoxDriver(ffBinary, firefoxProfile);
-//	System.setProperty("webdriver.firefox.driver", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-//    FirefoxProfile firefoxProfile = new FirefoxProfile();
-//    driver = new FirefoxDriver(firefoxProfile);
+//	File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+//	FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+//	FirefoxProfile firefoxProfile = new FirefoxProfile();
+//	driver = new FirefoxDriver(ffBinary, firefoxProfile);
+	  
+    driver = new FirefoxDriver();
+    
     baseUrl = "http://localhost:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
@@ -43,10 +43,19 @@ public class Selenium {
   @Test
   public void testSelenium() throws Exception {
     driver.get(baseUrl + "/admin/menu");
+    
+ /**********************************エビデンス*****************************/
+    File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file, new File("capture/topPage.png"));
+ /**********************************************************************/
     driver.findElement(By.name("courseregister")).click();
+    
+    File file1 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file1, new File("capture/input.png"));
     driver.findElement(By.name("confirm")).click();
+    
     driver.findElement(By.id("courseno")).clear();
-    driver.findElement(By.id("courseno")).sendKeys("EEEE");
+    driver.findElement(By.id("courseno")).sendKeys("RRRR");
     driver.findElement(By.id("coursename")).clear();
     driver.findElement(By.id("coursename")).sendKeys("12324");
     new Select(driver.findElement(By.id("year"))).selectByVisibleText("2017");
@@ -56,15 +65,20 @@ public class Selenium {
     new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
     new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("12");
     new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
-    driver.findElement(By.id("vacantseats")).clear();
-    driver.findElement(By.id("vacantseats")).sendKeys("5");
-    driver.findElement(By.name("confirm")).click();
-    driver.findElement(By.name("register")).click();
-    driver.findElement(By.name("toMenu")).click();
     
-    // エビデンス
-    File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-    FileUtils.copyFile(file, new File("capture/text.png"));
+    driver.findElement(By.id("vacantseats")).clear();
+    File file2 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file2, new File("capture/errormassage.png"));
+    
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    
+    driver.findElement(By.name("confirm")).click();
+    File file3 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file3, new File("capture/conf.png"));
+ 
+    driver.findElement(By.name("register")).click();
+    File file4 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file4, new File("capture/endPage.png"));
   }
 
   @After
