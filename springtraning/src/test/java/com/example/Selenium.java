@@ -13,12 +13,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.Select;
 
 public class Selenium {
@@ -111,6 +109,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).clear();
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
+    
+    File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file, new File("capture/testIsExistCourseno.png"));
   }
   
   /**
@@ -136,6 +137,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).clear();
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
+    
+    File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file, new File("capture/testRequiredCourseno.png"));
   }
   
   /**
@@ -161,6 +165,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).clear();
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
+    
+    File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file, new File("capture/testRequiredCoursename.png"));
   }
   
   /**
@@ -187,6 +194,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
     
+    File file1 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file1, new File("capture/testRequiredTheDate1.png"));
+    
     driver.findElement(By.id("courseno")).clear();
     driver.findElement(By.id("courseno")).sendKeys("@@@@");
     driver.findElement(By.id("coursename")).clear();
@@ -202,6 +212,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
     
+    File file2 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file2, new File("capture/testRequiredTheDate2.png"));
+    
     driver.findElement(By.id("courseno")).clear();
     driver.findElement(By.id("courseno")).sendKeys("@@@@");
     driver.findElement(By.id("coursename")).clear();
@@ -216,6 +229,9 @@ public class Selenium {
     driver.findElement(By.id("vacantseats")).clear();
     driver.findElement(By.id("vacantseats")).sendKeys("5");
     driver.findElement(By.name("confirm")).click();
+    
+    File file3 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(file3, new File("capture/testRequiredTheDate3.png"));
     
     driver.findElement(By.id("courseno")).clear();
     driver.findElement(By.id("courseno")).sendKeys("@@@@");
