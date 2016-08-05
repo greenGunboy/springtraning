@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>springtraning</artifactId>
+	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springtraning</name>
+	<name>firstSpring</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -40,7 +40,8 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
+		<!-- 追記開始 -->
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
@@ -61,14 +62,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+        <!-- 追記終了 -->
         
-        <dependency>																
-			<groupId>org.seleniumhq.selenium</groupId>															
-			<artifactId>selenium-java</artifactId>															
-			<version>2.52.0</version>															
-		</dependency>																
-        
-        															
 	</dependencies>
 
 	<build>
