@@ -34,17 +34,23 @@ public class Selenium {
 //	FirefoxProfile firefoxProfile = new FirefoxProfile();
 //	driver = new FirefoxDriver(ffBinary, firefoxProfile);
 	  
+	// 引数にfirefoxのパスを指定している為、この処理は実行可能になる
+	// 上記処理よりも引数に書くことで汎用性が上がる
     driver = new FirefoxDriver();
-    
     baseUrl = "http://localhost:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
+  /**
+   * 講座情報を入力し、登録するまでの処理
+   * @throws Exception
+   */
   @Test
   public void testSelenium() throws Exception {
     driver.get(baseUrl + "/admin/menu");
     
  /**********************************エビデンス*****************************/
+    // エビデンス（証跡）。画面操作処理の合間にその時の場面を画像として残す処理
     File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file, new File("capture/topPage.png"));
  /**********************************************************************/
@@ -79,6 +85,407 @@ public class Selenium {
     driver.findElement(By.name("register")).click();
     File file4 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file4, new File("capture/endPage.png"));
+  }
+  
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「講座番号」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testIsExistCourseno() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「講座番号」が重複しています。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredCourseno() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("RRRR");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「講座名」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredCoursename() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「講座開催日」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredTheDate() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「開始時刻」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredStarttime() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「終了時刻」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredEndtime() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「終了時刻」は「開始時刻」よりも後の時刻を入力してください。"
+   * @throws Exception
+   */
+  @Test
+  public void testContradictionTime() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("12");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("5");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「定員」は必須項目です。"
+   * @throws Exception
+   */
+  @Test
+  public void testRequiredVacantseats() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「定員」は数字で入力してください。"
+   * @throws Exception
+   */
+  @Test
+  public void testNumberVacantseats() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("あ");
+    driver.findElement(By.name("confirm")).click();
+  }
+  
+  /**
+   * エラーメッセージ表示確認
+   * "「定員」は1以上、50以下で入力してください。"
+   * @throws Exception
+   */
+  @Test
+  public void testRangeVacantseats() throws Exception {
+    driver.get(baseUrl + "/admin/menu");
+    driver.findElement(By.name("courseregister")).click();
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("0");
+    driver.findElement(By.name("confirm")).click();
+    
+    driver.findElement(By.id("courseno")).clear();
+    driver.findElement(By.id("courseno")).sendKeys("@@@@");
+    driver.findElement(By.id("coursename")).clear();
+    driver.findElement(By.id("coursename")).sendKeys("12345");
+    new Select(driver.findElement(By.id("year"))).selectByVisibleText("2016");
+    new Select(driver.findElement(By.id("month"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("day"))).selectByVisibleText("1");
+    new Select(driver.findElement(By.id("sthour"))).selectByVisibleText("10");
+    new Select(driver.findElement(By.id("stmin"))).selectByVisibleText("00");
+    new Select(driver.findElement(By.id("endhour"))).selectByVisibleText("11");
+    new Select(driver.findElement(By.id("endmin"))).selectByVisibleText("00");
+    driver.findElement(By.id("vacantseats")).clear();
+    driver.findElement(By.id("vacantseats")).sendKeys("51");
+    driver.findElement(By.name("confirm")).click();
   }
 
   @After

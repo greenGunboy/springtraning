@@ -121,7 +121,7 @@ public class CourseController {
 			result.reject("errors.required.etime");
 		}
 		// 「開始時刻」が「終了時刻」より後ではないかチェック
-		if(!form.getSthour().equals("") || !form.getStmin().equals("") || !form.getEndhour().equals("") || !form.getEndmin().equals("")) {
+		if(!form.getSthour().equals("") && !form.getStmin().equals("") && !form.getEndhour().equals("") && !form.getEndmin().equals("")) {
 			if(Integer.parseInt(form.getSthour() + form.getStmin()) >= Integer.parseInt(form.getEndhour() + form.getEndmin())) {
 				result.reject("errors.contradiction.time");
 			}
