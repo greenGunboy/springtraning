@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Refresh" content="10;URL =./input" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<title>メニュー</title>
+</head>
+<body>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.course.menu}"></span></h1>
+		<h3>「講座申込み」ボタンを押してください。</h3>
+		<br />
+		<br />
+		<br />
+		<form th:action="@{/course/input}" th:object="${applicationForm}" method="post">
+			<input type="submit" class="btn" name="courseApply" value="講座申込み" />
+		</form>
+	</div>
+</body>
+</html>

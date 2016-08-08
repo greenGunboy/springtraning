@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<title>講座申込み</title>
+</head>
+<body>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.course.input}"></span></h1>
+		<form th:action="@{/admin/conf}" th:object="${applicationForm}" method="post">
+			<table>
+				<tr>
+					<td>
+						<h3 class="red">※　は入力必須です。</h3>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p th:if = "${#fields.hasErrors('all')}"></p>
+						<p th:errors = "*{all}" class = "error-message">error!</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.name}" class="blue"></span>　<span class="red">※</span></td>
+					<td><input type="text" maxlength="100" th:field="*{name}" th:value="*{name}" th:errorclass = "error-input" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.furigana}" class="blue"></span>　<span class="red">※</span></td>
+					<td><input type="text" maxlength="100" th:field="*{furigana}" th:errorclass = "error-input" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.mail}" class="blue"></span>　<span class="red">※</span></td>
+					<td><input type="text" maxlength="255" th:field="*{mail}" th:errorclass = "error-input" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.birthday}" class="blue"></span>　<span class="red">※</span></td>
+					<td>
+						<select th:field="*{year}">
+							<option value=""></option>
+							<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
+						</select><span th:text="#{label.year}" class="blue"></span>
+						<select th:field="*{month}">
+							<option value=""></option>
+							<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
+						</select><span th:text="#{label.month}" class="blue"></span>
+						<select th:field="*{day}">
+							<option value=""></option>
+							<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
+						</select><span th:text="#{label.day}" class="blue"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.tel}" class="blue"></span>　<span class="red">※</span></td>
+					<td><input type="text" maxlength="15" th:field="*{tel}" th:errorclass = "error-input" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.remarks}"></span>　<span class="red">※</span></td>
+					<td><textarea th:field="*{remarks}" ></textarea></td>
+				</tr>
+			</table>
+			<input type="submit" class="btn" name="back" value="戻る" />
+			<input type="submit" class="btn" name="confirm" value="確認" />
+		</form>
+	</div>
+</body>
+</html>

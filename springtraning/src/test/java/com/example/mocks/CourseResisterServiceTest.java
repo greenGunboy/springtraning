@@ -39,6 +39,7 @@ public class CourseResisterServiceTest {
 	
 	/**
 	 * 重複メソッド動作テスト
+	 * 重複データがある場合
 	 * @throws Exception
 	 */
 	@Test
@@ -52,6 +53,11 @@ public class CourseResisterServiceTest {
 		assertThat(actual, is(true));
 	}
 	
+	/**
+	 * 重複メソッド動作テスト
+	 * 重複データが無かった場合
+	 * @throws Exception
+	 */
 	@Test
 	public void testNotExistCourseno() throws Exception {
 		
@@ -102,61 +108,5 @@ public class CourseResisterServiceTest {
 		boolean actual = sut.insertCourseInfo(null);
 		assertThat(actual, is(false));
 	}
-
-//	@Test
-//	public void getCourseList() {
-//		List<CourseInfo> arg1 = new ArrayList<>();
-//		arg1.add(createCourseInfo());
-//		arg1.add(createCourseInfo("部品Cd1", "部品Nm1", 100, "1111-11-11", "11:11", "11:11"));
-//		arg1.add(createCourseInfo("部品Cd2", "部品Nm2", -10, "2222-22-22", "22:22", "22:22"));
-//		
-//		// 実測値
-//		List<CourseInfo> actual = sut.getDataList(arg1, 0);
-//
-//		// 期待値
-//		List<CourseInfo> expected = new ArrayList<>();
-//		expected.add(createCourseInfo());
-//		expected.add(createCourseInfo("部品Cd1", "部品Nm1", 100, "1111-11-11", "11:11", "11:11"));
-//		expected.add(createCourseInfo("部品Cd2", "部品Nm2", -10, "2222-22-22", "22:22", "22:22"));
-//
-//		for(int i = 0; i < actual.size(); i++) {
-//			assertThat(actual.get(i).getCourseno(), is(expected.get(i).getCourseno()));
-//			assertThat(actual.get(i).getCoursename(), is(expected.get(i).getCoursename()));
-//			assertThat(actual.get(i).getVacantseats(), is(expected.get(i).getVacantseats()));
-//			assertThat(actual.get(i).getThedate(), is(expected.get(i).getThedate()));
-//			assertThat(actual.get(i).getStarttime(), is(expected.get(i).getThedate()));
-//			assertThat(actual.get(i).getEndtime(), is(expected.get(i).getEndtime()));
-//		}
-//
-//		assertThat(actual.size(), is(3));
-//	
-//	}
-//	
-//	private CourseInfo createCourseInfo() {
-//		CourseInfo ci = new CourseInfo();
-//		ci.setCourseno("TEST");
-//		ci.setCoursename("TEST");
-//		ci.setVacantseats(1);
-//		ci.setThedate("0000-00-00");
-//		ci.setStarttime("00:00");
-//		ci.setEndtime("00:00");
-//		return ci;
-//	}
-//	
-//	private CourseInfo createCourseInfo(String courseno, 
-//			String coursename, 
-//			Integer vacantseats, 
-//			String thedate, 
-//			String starttime, 
-//			String endtime) {
-//		CourseInfo ci = new CourseInfo();
-//		ci.setCourseno(courseno);
-//		ci.setCoursename(coursename);
-//		ci.setVacantseats(vacantseats);
-//		ci.setThedate(thedate);
-//		ci.setStarttime(starttime);
-//		ci.setEndtime(endtime);
-//		return ci;
-//	}
 	
 }
