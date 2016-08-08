@@ -11,56 +11,59 @@
 		<form th:action="@{/course/end}" th:object="${applicationForm}" method="post">
 			<table>
 				<tr>
+					<td colspan="2">
+						<h3 class="red">※　入力内容を確認してください。</h3>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.name}"></span></td>
 					<td>
-						<h3 class="red">※　は入力必須です。</h3>
+						<span th:text="*{name}"></span>
+						<input type="hidden" th:field="*{name}"	/>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4">
-						<p th:if = "${#fields.hasErrors('all')}"></p>
-						<p th:errors = "*{all}" class = "error-message">error!</p>
-					</td>
-				</tr>
-				<tr>
-					<td class="blue"><span th:text="#{label.name}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" maxlength="100" th:field="*{name}" th:value="*{name}" th:errorclass = "error-input" /></td>
-				</tr>
-				<tr>
-					<td class="blue"><span th:text="#{label.furigana}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" maxlength="100" th:field="*{furigana}" th:errorclass = "error-input" /></td>
-				</tr>
-				<tr>
-					<td class="blue"><span th:text="#{label.mail}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" maxlength="255" th:field="*{mail}" th:errorclass = "error-input" /></td>
-				</tr>
-				<tr>
-					<td class="blue"><span th:text="#{label.birthday}" class="blue"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.furigana}"></span></td>
 					<td>
-						<select th:field="*{year}">
-							<option value=""></option>
-							<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
-						</select><span th:text="#{label.year}" class="blue"></span>
-						<select th:field="*{month}">
-							<option value=""></option>
-							<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
-						</select><span th:text="#{label.month}" class="blue"></span>
-						<select th:field="*{day}">
-							<option value=""></option>
-							<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}" th:errorclass = "error-input"></option>
-						</select><span th:text="#{label.day}" class="blue"></span>
+						<span th:text="*{furigana}"></span>
+						<input type="hidden" th:field="*{furigana}"	/>
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.tel}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" maxlength="15" th:field="*{tel}" th:errorclass = "error-input" /></td>
+					<td class="blue"><span th:text="#{label.mail}"></span></td>
+					<td>
+						<span th:text="*{mail}"></span>
+						<input type="hidden" th:field="*{mail}"	/>
+					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.remarks}"></span>　<span class="red">※</span></td>
-					<td><textarea th:field="*{remarks}" ></textarea></td>
+					<td class="blue"><span th:text="#{label.birthday}"></span></td>
+					<td>
+						<span th:text="*{year}"></span><span th:text="#{label.year}" class="blue"></span>
+						<span th:text="*{month}"></span><span th:text="#{label.month}" class="blue"></span>
+						<span th:text="*{day}"></span><span th:text="#{label.day}" class="blue"></span>
+						<input type="hidden" th:field="*{year}"	/>
+						<input type="hidden" th:field="*{month}" />
+						<input type="hidden" th:field="*{day}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.tel}"></span></td>
+					<td>
+						<span th:text="*{tel}"></span>
+						<input type="hidden" th:field="*{tel}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.remarks}"></span></td>
+					<td>
+						<span th:text="*{remarks}"></span>
+						<input type="hidden" th:field="*{remarks}" />
+					</td>
 				</tr>
 			</table>
 			<input type="submit" class="btn" name="back" value="戻る" />
-			<input type="submit" class="btn" name="register" value="申込み" />
+			<input type="submit" class="btn" name="apply" value="申込み" />
 		</form>
 	</div>
 </body>

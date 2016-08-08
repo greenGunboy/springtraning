@@ -8,7 +8,7 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.course.input}"></span></h1>
-		<form th:action="@{/admin/conf}" th:object="${applicationForm}" method="post">
+		<form th:action="@{/course/conf}" th:object="${applicationForm}" method="post">
 			<table>
 				<tr>
 					<td>
@@ -55,12 +55,35 @@
 					<td><input type="text" maxlength="15" th:field="*{tel}" th:errorclass = "error-input" /></td>
 				</tr>
 				<tr>
+					<td class="blue"><span th:text="#{label.applyCourse}"></span></td>
+					<td>
+						<table border="1">
+							<tr>
+								<th>開催日時</th>
+								<th>講座名</th>
+								<th>空席状況</th>
+								<th>チェック</th>
+							</tr>
+							<tr th:each="applycourseInfo : ${applycourseInfo}">
+								<td>
+									<span th:text="${applycourseInfo.thedate}"></span>
+									<span th:text="${applycourseInfo.week}"></span>
+									<span th:text="${applycourseInfo.starttime}"></span>
+									<span th:text="${applycourseInfo.endtime}"></span>
+								</td>
+								<td th:text="${applycourseInfo .coursename}"></td>
+								<td th:text="${applycourseInfo .vacantseats}"></td>
+								<td><input type="checkbox" th:field="*{applyCourse}" value="*{applycourseInfo .courseno}"/></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
 					<td class="blue"><span th:text="#{label.remarks}"></span>　<span class="red">※</span></td>
-					<td><textarea th:field="*{remarks}" ></textarea></td>
+					<td><pre><textarea th:field="*{remarks}"  rows = "6" cols = "50"></textarea></pre></td>
 				</tr>
 			</table>
-			<input type="submit" class="btn" name="back" value="戻る" />
-			<input type="submit" class="btn" name="confirm" value="確認" />
+			<input type="submit" class="btn" value="確認" />
 		</form>
 	</div>
 </body>

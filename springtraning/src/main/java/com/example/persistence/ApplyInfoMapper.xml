@@ -1,1 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+        "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persistence.ApplyInfoMapper">
+    <select id="serchCourseInfo" resultType="HashMap">
+        SELECT thedate, starttime, endtime, coursename, vacantseats - COUNT(course_apply.courseno) AS vacantseats, DAYOFWEEK(thedate) AS week, course.courseno 
+		FROM course LEFT JOIN course_apply 
+		ON course.courseno = course_apply.courseno 
+		WHERE thedate > now() 
+		GROUP BY courseno 
+		ORDER BY thedate LIMIT 5
+    </select>
+    
+</mapper>
+
