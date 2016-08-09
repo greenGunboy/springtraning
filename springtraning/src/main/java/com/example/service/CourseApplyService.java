@@ -30,8 +30,9 @@ public class CourseApplyService {
 	 * applicationテーブルへ利用者情報をinsert
 	 * @param applycationForm 入力された利用者情報
 	 */
-	public void insertApply(ApplicationForm applycationForm) {
-		Dao.insertApply(applycationForm);
+	public boolean insertApply(ApplicationForm applycationForm) {
+		boolean flag = Dao.insertApply(applycationForm);
+		return flag;
 	}
 	
 	/**
@@ -49,8 +50,9 @@ public class CourseApplyService {
 	 * @param id　利用者ID
 	 * @param courseno　入力された希望講座（複数）
 	 */
-	public void insertCourseApply(String id, String[] courseno) {
-		Dao.insertCourseApply(id, courseno);
+	public boolean insertCourseApply(String id, String[] courseno) {
+		boolean flg = Dao.insertCourseApply(id, courseno);
+		return flg;
 	}
 	
 }

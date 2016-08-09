@@ -8,7 +8,7 @@ import com.example.web.control.ApplicationForm;
 
 public interface ApplyInfoMapper {
 
-	// 未来5個分の講座情報を取得する
+	// 未来5個分の講座情報を取得する。希望講座一覧で使用する
 	public List<CourseInfo> serchCourseInfo();
 	// applicationテーブルへ利用者情報をinsert
 	public void insertApply(ApplicationForm applycationForm);

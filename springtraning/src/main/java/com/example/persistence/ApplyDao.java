@@ -37,12 +37,17 @@ public class ApplyDao {
 	 * applicationテーブルへ利用者情報をinsert
 	 * @param applycationForm 入力された利用者情報
 	 */
-	public void insertApply(ApplicationForm applycationForm) {
+	public boolean insertApply(ApplicationForm applicationForm) {
 		// 性別が選択されていない場合3（性別不明）に変換
-		if(applycationForm.getGender() == 0){
-			applycationForm.setGender(3);
+		if(applicationForm.getGender() == 0){
+			applicationForm.setGender(3);
 		}
-		mapper.insertApply(applycationForm);
+		try {
+			mapper.insertApply(applicationForm);
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
 	}
 	
 	/**
@@ -60,14 +65,19 @@ public class ApplyDao {
 	 * @param id　利用者ID
 	 * @param courseno　入力された希望講座（複数）
 	 */
-	public void insertCourseApply(String id, String[] courseno) {
+	public boolean insertCourseApply(String id, String[] courseno) {
 		ApplyCourseInfo applyCourseInfo = new ApplyCourseInfo();
 		// 利用者IDをセット
 		applyCourseInfo.setId_application(id);
-		// 選択された希望講座の回数分course_aaplyテーブルへinsertする
-		for(String coursenm : courseno) {
-			applyCourseInfo.setCourseno(coursenm);
-			mapper.insertCourseApply(applyCourseInfo);
+		try {
+			// 選択された希望講座の回数分course_aaplyテーブルへinsertする
+			for(String coursenm : courseno) {
+				applyCourseInfo.setCourseno(coursenm);
+				mapper.insertCourseApply(applyCourseInfo);
+			}
+			return true;
+		} catch(Exception e) {
+			return false;
 		}
 	}
 }
