@@ -17,5 +17,4 @@ public class ApplyCourseInfo {
 	public void setCourseno(String courseno) {
 		this.courseno = courseno;
 	}
-	
 }

@@ -62,7 +62,9 @@ public class ApplyDao {
 	 */
 	public void insertCourseApply(String id, String[] courseno) {
 		ApplyCourseInfo applyCourseInfo = new ApplyCourseInfo();
+		// 利用者IDをセット
 		applyCourseInfo.setId_application(id);
+		// 選択された希望講座の回数分course_aaplyテーブルへinsertする
 		for(String coursenm : courseno) {
 			applyCourseInfo.setCourseno(coursenm);
 			mapper.insertCourseApply(applyCourseInfo);

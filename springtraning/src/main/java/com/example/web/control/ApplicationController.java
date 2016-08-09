@@ -85,7 +85,7 @@ public class ApplicationController {
 	
 	@RequestMapping("/course/input")
 	public String menuToinputPage(Model model) throws Exception {
-		// 希望講座に表示する5件の講座一覧を取得
+		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
 		List<CourseInfo> list = service.serchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
@@ -95,7 +95,7 @@ public class ApplicationController {
 	@RequestMapping("/course/conf")
 	public String inputToconfPage(@Validated @ModelAttribute("applicationForm") ApplicationForm form, 
 			BindingResult result, Model model) throws Exception {
-		// 希望講座に表示する5件の講座一覧を取得
+		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
 		List<CourseInfo> list = service.serchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
@@ -103,6 +103,7 @@ public class ApplicationController {
 		if(form.getYear().equals("") || form.getMonth().equals("") || form.getDay().equals("")) {
 			result.reject("errors.required.birthday");
 		}
+		// 「電話番号」の数字チェック
 		if (!form.getTel().equals("")) {
 			try {
 				Long.parseLong(form.getTel());
@@ -119,7 +120,7 @@ public class ApplicationController {
 	@RequestMapping(value="/course/end", params="back")
 	public String confToinputPage(@ModelAttribute("applicationForm") ApplicationForm form, 
 			Model model) throws Exception {
-		// 希望講座に表示する5件の講座一覧を取得
+		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
 		List<CourseInfo> list = service.serchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
