@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.ApplyCourseInfo;
 import com.example.domain.CourseInfo;
 import com.example.service.CourseApplyService;
 
@@ -82,26 +84,57 @@ public class ApplicationController {
 	}
 	
 	@RequestMapping("/course/input")
-	public String inputPage(Model model) throws Exception {
-		
-		List<ApplyCourseInfo> list = service.serchCourseInfo();
-		model.addAttribute("applycourseInfo", list);
+	public String menuToinputPage(Model model) throws Exception {
+		// 希望講座に表示する5件の講座一覧を取得
+		List<CourseInfo> list = service.serchCourseInfo();
+		model.addAttribute("courseInfo", list);
 		
 		return "course/input";
 	}
 	
 	@RequestMapping("/course/conf")
-	public String confPage() {
+	public String inputToconfPage(@Validated @ModelAttribute("applicationForm") ApplicationForm form, 
+			BindingResult result, Model model) throws Exception {
+		// 希望講座に表示する5件の講座一覧を取得
+		List<CourseInfo> list = service.serchCourseInfo();
+		model.addAttribute("courseInfo", list);
+		
+		// 「生年月日」の未記入チェック
+		if(form.getYear().equals("") || form.getMonth().equals("") || form.getDay().equals("")) {
+			result.reject("errors.required.birthday");
+		}
+		if (!form.getTel().equals("")) {
+			try {
+				Long.parseLong(form.getTel());
+			} catch (NumberFormatException e) {
+				result.reject("errors.NumberFormatException.tel");
+			}
+		}
+		if(result.hasErrors()) {
+			return "course/input";
+		}
 		return "course/conf";
 	}
 	
 	@RequestMapping(value="/course/end", params="back")
-	public String confToinputPage(@ModelAttribute("applicationForm") CourseForm form) {
+	public String confToinputPage(@ModelAttribute("applicationForm") ApplicationForm form, 
+			Model model) throws Exception {
+		// 希望講座に表示する5件の講座一覧を取得
+		List<CourseInfo> list = service.serchCourseInfo();
+		model.addAttribute("courseInfo", list);
+		
 		return "course/input";
 	}
 	
+	@Transactional
 	@RequestMapping(value="/course/end", params="apply")
-	public String confToendPage() {
+	public String confToendPage(ApplicationForm form) {
+		// 利用者情報をapplicationテーブルへinsert
+		service.insertApply(form);
+		// 上記でinsertされたprimary keyを取得
+		String id = service.lastInsertId();
+		// 利用者IDとその利用者が申込んだ講座をcourse_appplyテーブルへinsert
+		service.insertCourseApply(id, form.getApplyCourse());
 		return "course/end";
 	}
 }

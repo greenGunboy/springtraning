@@ -9,7 +9,7 @@
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.course.end}"></span></h1>
 		<h3 class="blue">講座申込みの受付を完了しました。<br />ありがとうございました。</h3>
-		<form th:action="@{/course/menu}" th:object="${applicationForm}" method="post">
+		<form th:action="@{/course/input}" th:object="${applicationForm}" method="post">
 			<input type="submit" class="btn" value="追加申込み" />
 		</form>
 	</div>

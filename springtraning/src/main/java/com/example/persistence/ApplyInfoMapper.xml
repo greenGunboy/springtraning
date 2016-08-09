@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.persistence.ApplyInfoMapper">
     <select id="serchCourseInfo" resultType="HashMap">
-        SELECT thedate, starttime, endtime, coursename, vacantseats - COUNT(course_apply.courseno) AS vacantseats, DAYOFWEEK(thedate) AS week, course.courseno 
+        SELECT thedate, starttime, endtime, coursename, vacantseats - COUNT(course_apply.courseno) AS vacantseats, course.courseno AS courseno
 		FROM course LEFT JOIN course_apply 
 		ON course.courseno = course_apply.courseno 
 		WHERE thedate > now() 
@@ -13,5 +13,20 @@
 		ORDER BY thedate LIMIT 5
     </select>
     
+    <insert id="insertApply">
+	    INSERT INTO application 
+	    (name, furigana, mail, sex, birthday, tel, remarks, inpdate) 
+	    VALUES (#{name}, #{furigana}, #{mail}, #{gender}, #{birthday}, #{tel}, #{remarks}, CURRENT_DATE())
+    </insert>
+    
+    <select id="lastInsertId" resultType="String">
+    	SELECT LAST_INSERT_ID()
+    </select>
+    
+    <insert id="insertCourseApply">
+	    INSERT INTO course_apply 
+	    (id_application, courseno, inpdate) 
+	    VALUES (#{id_application}, #{courseno}, CURRENT_DATE())
+    </insert>
 </mapper>
 

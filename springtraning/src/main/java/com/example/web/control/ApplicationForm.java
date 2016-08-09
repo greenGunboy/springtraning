@@ -1,9 +1,16 @@
 package com.example.web.control;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ApplicationForm {
 
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String furigana;
+	@NotEmpty
+	@Email(message="「Eメールアドレス」の形式が不正です。")
 	private String mail;
 	private int gender;
 	private String year;
@@ -11,6 +18,7 @@ public class ApplicationForm {
 	private String day;
 	private String birthday;
 	private String tel;
+	@NotEmpty
 	private String[] applyCourse;
 	private String remarks;
 	

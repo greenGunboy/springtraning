@@ -34,6 +34,13 @@
 					<td><input type="text" maxlength="255" th:field="*{mail}" th:errorclass = "error-input" /></td>
 				</tr>
 				<tr>
+					<td class="blue"><span th:text="#{label.gender}" class="blue"></span></td>
+					<td>
+						<input type="radio" th:field="*{gender}" value="1" />男
+						<input type="radio" th:field="*{gender}" value="2" />女
+					</td>
+				</tr>
+				<tr>
 					<td class="blue"><span th:text="#{label.birthday}" class="blue"></span>　<span class="red">※</span></td>
 					<td>
 						<select th:field="*{year}">
@@ -51,11 +58,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.tel}" class="blue"></span>　<span class="red">※</span></td>
-					<td><input type="text" maxlength="15" th:field="*{tel}" th:errorclass = "error-input" /></td>
+					<td class="blue"><span th:text="#{label.tel}" class="blue"></span></td>
+					<td><input type="text" maxlength="15" th:field="*{tel}" th:value="*{tel}" th:errorclass="error-input" /></td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.applyCourse}"></span></td>
+					<td class="blue"><span th:text="#{label.applyCourse}"></span> <span class="red">※</span></td>
 					<td>
 						<table border="1">
 							<tr>
@@ -64,22 +71,22 @@
 								<th>空席状況</th>
 								<th>チェック</th>
 							</tr>
-							<tr th:each="applycourseInfo : ${applycourseInfo}">
+							<tr th:each="courseInfo : ${courseInfo}">
 								<td>
-									<span th:text="${applycourseInfo.thedate}"></span>
-									<span th:text="${applycourseInfo.week}"></span>
-									<span th:text="${applycourseInfo.starttime}"></span>
-									<span th:text="${applycourseInfo.endtime}"></span>
+									<span th:text="${#dates.format(courseInfo.thedate, 'yyyy年MMM月dd日 (E)')}"></span>
+									<span th:text="${courseInfo.starttime}"></span>-<span th:text="${courseInfo.endtime}"></span>
 								</td>
-								<td th:text="${applycourseInfo .coursename}"></td>
-								<td th:text="${applycourseInfo .vacantseats}"></td>
-								<td><input type="checkbox" th:field="*{applyCourse}" value="*{applycourseInfo .courseno}"/></td>
+								<td th:text="${courseInfo.coursename}"></td>
+								<td th:text="${courseInfo.vacantseats} > 0 ? '残' + ${courseInfo.vacantseats} + '席' : '満席'"></td>
+								<td th:if="${courseInfo.vacantseats} != 0">
+									<input type="checkbox" th:field="*{applyCourse}" th:value="${courseInfo.courseno}"/>
+								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.remarks}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.remarks}"></span></td>
 					<td><pre><textarea th:field="*{remarks}"  rows = "6" cols = "50"></textarea></pre></td>
 				</tr>
 			</table>

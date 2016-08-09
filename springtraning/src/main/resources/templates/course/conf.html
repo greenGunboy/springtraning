@@ -37,6 +37,14 @@
 					</td>
 				</tr>
 				<tr>
+					<td class="blue"><span th:text="#{label.gender}" class="blue"></span></td>
+					<td>
+						<input type="radio" th:field="*{gender}" value="1" disabled="disabled" />男
+						<input type="radio" th:field="*{gender}" value="2" disabled="disabled" />女
+						<input type="hidden" th:field="*{gender}" />
+					</td>
+				</tr>
+				<tr>
 					<td class="blue"><span th:text="#{label.birthday}"></span></td>
 					<td>
 						<span th:text="*{year}"></span><span th:text="#{label.year}" class="blue"></span>
@@ -55,15 +63,40 @@
 					</td>
 				</tr>
 				<tr>
+					<td class="blue"><span th:text="#{label.applyCourse}"></span></td>
+					<td>
+						<table border="1">
+							<tr>
+								<th>開催日時</th>
+								<th>講座名</th>
+								<th>空席状況</th>
+								<th>チェック</th>
+							</tr>
+							<tr th:each="courseInfo : ${courseInfo}">
+								<td>
+									<span th:text="${#dates.format(courseInfo.thedate, 'yyyy年MMM月dd日 (E)')}"></span>
+									<span th:text="${courseInfo.starttime}"></span>-<span th:text="${courseInfo.endtime}"></span>
+								</td>
+								<td th:text="${courseInfo .coursename}"></td>
+								<td th:text="${courseInfo.vacantseats} > 0 ? '残' + ${courseInfo.vacantseats} + '席' : '満席'"></td>
+								<td th:if="${courseInfo.vacantseats} != 0">
+									<input type="checkbox" th:field="*{applyCourse}" th:value="${courseInfo.courseno}" disabled="disabled" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
 					<td class="blue"><span th:text="#{label.remarks}"></span></td>
 					<td>
-						<span th:text="*{remarks}"></span>
+						<pre><span th:text="*{remarks}"></span></pre>
 						<input type="hidden" th:field="*{remarks}" />
 					</td>
 				</tr>
 			</table>
 			<input type="submit" class="btn" name="back" value="戻る" />
 			<input type="submit" class="btn" name="apply" value="申込み" />
+			<input type="hidden" th:field="*{applyCourse}" />
 		</form>
 	</div>
 </body>
