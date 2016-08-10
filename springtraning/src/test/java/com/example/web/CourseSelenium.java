@@ -1,4 +1,4 @@
-package com.example;
+package com.example.web;
 
 import static org.junit.Assert.fail;
 
@@ -38,7 +38,7 @@ public class CourseSelenium {
    * @throws Exception
    */
   @Test
-  public void testCourseSelenium() throws Exception {
+  public void testCourseApplyComplete() throws Exception {
     driver.get(baseUrl + "/course/menu");
     
     // トップページをエビデンス

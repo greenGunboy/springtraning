@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<title>メニュー</title>
+</head>
+<body>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.total.editconf}"></span></h1>
+		<h3 class="blue">講座情報の修正内容を確認してください。</h3>
+		<form th:action="@{/total/editend}" th:object="${loginForm}" method="post">
+			<table>
+				<tr>
+					<td class="blue"><span th:text="#{label.courseno}"></span></td>
+					<td>
+						<span th:text="*{courseno}"></span>
+						<input type="hidden" th:field="*{courseno}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.coursename}"></span></td>
+					<td>
+						<span th:text="*{coursename}"></span>
+						<input type="hidden" th:field="*{coursename}"	/>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.thedate}"></span></td>
+					<td>
+						<span th:text="*{year}"></span><span th:text="#{label.year}" class="blue"></span>
+						<span th:text="*{month}"></span><span th:text="#{label.month}" class="blue"></span>
+						<span th:text="*{day}"></span><span th:text="#{label.day}" class="blue"></span>
+						<input type="hidden" th:field="*{year}"	/>
+						<input type="hidden" th:field="*{month}" />
+						<input type="hidden" th:field="*{day}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.starttime}"></span></td>
+					<td>
+						<span th:text="*{sthour}"></span><span th:text="#{label.hour}" class="blue"></span>
+						<span th:text="*{stmin}"></span><span th:text="#{label.min}" class="blue"></span>
+						<input type="hidden" th:field="*{sthour}" />
+						<input type="hidden" th:field="*{stmin}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.endtime}"></span></td>
+					<td>
+						<span th:text="*{endhour}"></span><span th:text="#{label.hour}" class="blue"></span>
+						<span th:text="*{endmin}"></span><span th:text="#{label.min}" class="blue"></span>
+						<input type="hidden" th:field="*{endhour}" />
+						<input type="hidden" th:field="*{endmin}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.vacantseats}"></span></td>
+					<td>
+						<span th:text="*{vacantseats}"></span><span th:text="#{label.person}" class="blue"></span>
+						<input type="hidden" th:field="*{vacantseats}" />
+					</td>
+				</tr>
+			</table>
+			<br />
+			<input type="submit" class="btn" name="back" value="戻る" />
+			<input type="submit" class="btn" name="edit" value="修正" />
+		</form>
+	</div>
+</body>
+</html>

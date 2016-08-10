@@ -1,9 +1,9 @@
-package com.example.persistence;
+package com.example.persistence.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.CourseInfo;
+import com.example.domain.admin.CourseInfo;
 
 @Repository
 public class CourseDao {
@@ -38,7 +38,6 @@ public class CourseDao {
 	 * @return　重複データがあれば1、なければ0
 	 */
 	public int isExistCourse(String courseno) {
-		int count = mapper.getCountByCourseno(courseno);
-		return count;
+		return mapper.getCountByCourseno(courseno);
 	}
 }

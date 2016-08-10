@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.course;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.domain.CourseInfo;
-import com.example.persistence.ApplyDao;
-import com.example.web.control.ApplicationForm;
+import com.example.domain.admin.CourseInfo;
+import com.example.persistence.course.ApplyDao;
+import com.example.web.control.course.ApplicationForm;
 
 @Service
 public class CourseApplyService {

@@ -3,7 +3,7 @@
         "-//mybatis.org//DTD Mapper 3.0//EN" 
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.persistence.ApplyInfoMapper">
+<mapper namespace="com.example.persistence.course.ApplyInfoMapper">
 <!-- <select id="serchCourseInfo" resultType="com.example.domain.CourseInfo"> -->
     <select id="searchCourseInfo" resultType="HashMap">
         SELECT thedate, starttime, endtime, coursename, vacantseats - COUNT(course_apply.courseno) AS vacantseats, course.courseno AS courseno

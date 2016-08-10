@@ -1,4 +1,4 @@
-package com.example;
+package com.example.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

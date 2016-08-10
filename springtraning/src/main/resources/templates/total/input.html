@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<title>メニュー</title>
+</head>
+<body>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.total.input}"></span></h1>
+		<form th:action="@{/total/conf}" th:object="${configForm}" method="post">
+			<table>
+				<tr>
+					<td class="blue"><span th:text="#{label.courseno}" class="blue"></span></td>
+					<td><input type="text" maxlength="4" th:field="*{courseno}" th:value="*{courseno}" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.coursename}" class="blue"></span></td>
+					<td><input type="text" maxlength="40" th:field="*{coursename}" /></td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.thedate}" class="blue"></span></td>
+					<td>
+						<select th:field="*{year}">
+							<option value=""></option>
+							<option th:each="i : ${yearList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.year}" class="blue"></span>
+						<select th:field="*{month}">
+							<option value=""></option>
+							<option th:each="i : ${monthList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.month}" class="blue"></span>
+						<select th:field="*{day}">
+							<option value=""></option>
+							<option th:each="i : ${dayList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.day}" class="blue"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.starttime}"></span></td>
+					<td>
+						<select th:field="*{sthour}">
+							<option value=""></option>
+							<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.hour}" class="blue"></span>
+						<select th:field="*{stmin}">
+							<option value=""></option>
+							<option th:each="i : ${minList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.min}" class="blue"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.endtime}"></span></td>
+					<td>
+						<select th:field="*{endhour}">
+							<option value=""></option>
+							<option th:each="i : ${hourList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.hour}" class="blue"></span>
+						<select th:field="*{endmin}">
+							<option value=""></option>
+							<option th:each="i : ${minList}" th:value="${i}" th:text="${i}" ></option>
+						</select><span th:text="#{label.min}" class="blue"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue"><span th:text="#{label.vacantseats}"></span></td>
+					<td>
+						<input type="text" th:field="*{minvacantseats}" /><span th:text="#{label.person}" class="blue"></span>から
+						<input type="text" th:field="*{maxvacantseats}" /><span th:text="#{label.person}" class="blue"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue">状態</td>
+					<td>
+						<input type="radio" th:field="*{state}" value="end" />終了
+						<input type="radio" th:field="*{state}" value="session" />開催中
+						<input type="radio" th:field="*{state}" value="plan" />開催予定
+						<input type="radio" th:field="*{state}" value="none" />条件無し
+					</td>
+				</tr>
+			</table>
+			<br />
+			<input type="submit" class="btn" value="検索" />
+		</form>
+	</div>
+</body>
+</html>

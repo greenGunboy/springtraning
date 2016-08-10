@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<title>メニュー</title>
+</head>
+<body>
+	<div class="box">
+		<h1 class="blue"><span th:text="#{title.total.end}"></span></h1>
+		<form th:action="@{/total/loginmenu}" th:object="${loginForm}" method="post">
+			<table align="center">
+				<tr>
+					<td class="blue">ユーザID</td>
+					<td>
+						<span th:text="*{userid}"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="blue">上記IDでユーザが登録されました。</td>
+				</tr>
+			</table>
+			<br />
+			<input type="submit" class="btn" name="toCourseApply" value="講座申込み" /><br />
+			<br />
+			<input type="submit" class="btn" name="logout" value="ログアウト" />
+		</form>
+	</div>
+</body>
+</html>

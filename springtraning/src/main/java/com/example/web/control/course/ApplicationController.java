@@ -1,4 +1,4 @@
-package com.example.web.control;
+package com.example.web.control.course;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,8 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.CourseInfo;
-import com.example.service.CourseApplyService;
+import com.example.domain.admin.CourseInfo;
+import com.example.service.course.CourseApplyService;
 
 @Controller
 public class ApplicationController {

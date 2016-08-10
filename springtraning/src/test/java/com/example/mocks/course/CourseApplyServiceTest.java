@@ -1,4 +1,4 @@
-package com.example.mocks;
+package com.example.mocks.course;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.domain.CourseInfo;
-import com.example.persistence.ApplyDao;
-import com.example.service.CourseApplyService;
-import com.example.web.control.ApplicationForm;
+import com.example.domain.admin.CourseInfo;
+import com.example.persistence.course.ApplyDao;
+import com.example.service.course.CourseApplyService;
+import com.example.web.control.course.ApplicationForm;
 
 import mockit.Expectations;
 import mockit.Mocked;

@@ -1,10 +1,9 @@
-package com.example.web.control;
+package com.example.web.control.admin;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,8 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.CourseInfo;
-import com.example.service.CourseResisterService;
+import com.example.service.admin.CourseResisterService;
+import com.example.web.control.total.ConfigForm;
 
 @Controller
 public class CourseController {
@@ -84,8 +83,8 @@ public class CourseController {
 	
 	// menu.htmlでの「講座修正削除」ボタン押下時処理
 	@RequestMapping(value = "/admin/input", params="courseedit")
-	public String editPage() {
-		return "admin/end";
+	public String editPage(@ModelAttribute("configForm") ConfigForm form) {
+		return "total/input";
 	}
 	
 	// menu.htmlでの自動遷移用処理
@@ -141,13 +140,11 @@ public class CourseController {
 	// conf.htmlでの「登録」ボタン押下時処理
 	@RequestMapping(value="/admin/end", params="register")
 	public String confToendPage(@ModelAttribute("courserForm") CourseForm form) throws Exception {
-		CourseInfo courseInfo = new CourseInfo();
-		BeanUtils.copyProperties(form, courseInfo);
-		boolean flg = service.insertCourseInfo(courseInfo);
+		boolean flg = service.insertCourseInfo(form);
 		if(flg) {
 			return "redirect:/admin/end?finish";
 		} else {
-			return "admin/error";
+			return "course/error";
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package com.example.mocks;
+package com.example.mocks.admin;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.domain.CourseInfo;
-import com.example.persistence.CourseDao;
-import com.example.service.CourseResisterService;
+import com.example.domain.admin.CourseInfo;
+import com.example.persistence.admin.CourseDao;
+import com.example.service.admin.CourseResisterService;
+import com.example.web.control.admin.CourseForm;
 
 import mockit.Expectations;
 import mockit.Mocked;
@@ -88,7 +89,7 @@ public class CourseResisterServiceTest {
 			mockDao.insertCourseinfo((CourseInfo)any);
 			result = true;
 		}};
-		boolean actual = sut.insertCourseInfo(new CourseInfo());
+		boolean actual = sut.insertCourseInfo(new CourseForm());
 		assertThat(actual, is(true));
 	}
 	

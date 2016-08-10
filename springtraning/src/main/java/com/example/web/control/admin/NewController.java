@@ -1,4 +1,4 @@
-package com.example.web.control;
+package com.example.web.control.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

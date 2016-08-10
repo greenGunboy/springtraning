@@ -1,13 +1,13 @@
-package com.example.persistence;
+package com.example.persistence.course;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.ApplyCourseInfo;
-import com.example.domain.CourseInfo;
-import com.example.web.control.ApplicationForm;
+import com.example.domain.admin.CourseInfo;
+import com.example.domain.course.ApplyCourseInfo;
+import com.example.web.control.course.ApplicationForm;
 
 @Repository
 public class ApplyDao {

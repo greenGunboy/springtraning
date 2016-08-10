@@ -1,6 +1,6 @@
-package com.example.persistence;
+package com.example.persistence.admin;
 
-import com.example.domain.CourseInfo;
+import com.example.domain.admin.CourseInfo;
 
 public interface CourseInfoMapper {
 

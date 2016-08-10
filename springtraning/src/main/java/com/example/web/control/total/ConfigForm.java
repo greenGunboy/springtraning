@@ -1,29 +1,19 @@
-package com.example.web.control.admin;
+package com.example.web.control.total;
 
-import javax.validation.constraints.NotNull;
+public class ConfigForm {
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
-
-public class CourseForm {
-	
-	@NotEmpty
 	private String courseno;
-	@NotEmpty
 	private String coursename;
 	private String year;
 	private String month;
 	private String day;
-	@NotNull
-	@Range(min=1, max=50, message="「{0}」は、{min}以上、{max}以下で入力してください。")
-	private Integer vacantseats;
 	private String sthour;
 	private String stmin;
 	private String endhour;
 	private String endmin;
-	private String thedate;
-	private String starttime;
-	private String endtime;
+	private String minvacantseats;
+	private String maxvacantseats;
+	private String state;
 	
 	public String getCourseno() {
 		return courseno;
@@ -55,12 +45,6 @@ public class CourseForm {
 	public void setDay(String day) {
 		this.day = day;
 	}
-	public Integer getVacantseats() {
-		return vacantseats;
-	}
-	public void setVacantseats(Integer vacantseats) {
-		this.vacantseats = vacantseats;
-	}
 	public String getSthour() {
 		return sthour;
 	}
@@ -85,19 +69,22 @@ public class CourseForm {
 	public void setEndmin(String endmin) {
 		this.endmin = endmin;
 	}
-	// insert用に"0000-00-00"の形にフォーマット
-	public String getThedate() {
-		this.thedate = year + "-" + String.format("%02d", Integer.valueOf(month)) + "-" + String.format("%02d", Integer.valueOf(day));
-		return thedate;
+	public String getMinvacantseats() {
+		return minvacantseats;
 	}
-	// insert用に"00:00"の形にフォーマット
-	public String getStarttime() {
-		this.starttime = sthour + ":" + stmin;
-		return starttime;
+	public void setMinvacantseats(String minvacantseats) {
+		this.minvacantseats = minvacantseats;
 	}
-	// insert用に"00:00"の形にフォーマット
-	public String getEndtime() {
-		this.endtime = endhour + ":" + endmin;
-		return endtime;
+	public String getMaxvacantseats() {
+		return maxvacantseats;
+	}
+	public void setMaxvacantseats(String maxvacantseats) {
+		this.maxvacantseats = maxvacantseats;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 }
