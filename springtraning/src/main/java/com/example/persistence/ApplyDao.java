@@ -29,8 +29,7 @@ public class ApplyDao {
 	 * @return
 	 */
 	public List<CourseInfo> getCourseInfo() {
-		List<CourseInfo> list = mapper.serchCourseInfo();
-		return list;
+		return mapper.searchCourseInfo();
 	}
 	
 	/**
@@ -56,8 +55,7 @@ public class ApplyDao {
 	 * @return 最後にinsertされたID
 	 */
 	public String lastInsertId() {
-		String id = mapper.lastInsertId();
-		return id;
+		return mapper.lastInsertId();
 	}
 	
 	/**

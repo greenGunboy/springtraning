@@ -40,12 +40,12 @@ public class CourseApplyServiceTest {
 			mockDao.getCourseInfo();
 			result = new ArrayList<CourseInfo>();
 		}};
-		List<CourseInfo> actual = sut.serchCourseInfo();
+		List<CourseInfo> actual = sut.searchCourseInfo();
 		assertThat(actual, is(new ArrayList<CourseInfo>()));
 	}
 	
 	/**
-	 * applicationテーブルへ利用者情報を登録するinsertメソッドのテスト
+	 * insertメソッドのテスト
 	 * DB接続成功時
 	 */
 	@Test
@@ -54,7 +54,7 @@ public class CourseApplyServiceTest {
 			mockDao.insertApply((ApplicationForm)any);
 			result = true;
 		}};
-		boolean actual = sut.insertApply(new ApplicationForm());
+		boolean actual = sut.insertApplyInfo(new ApplicationForm());
 		assertThat(actual, is(true));
 	}
 	
@@ -68,50 +68,8 @@ public class CourseApplyServiceTest {
 			mockDao.insertApply((ApplicationForm)any);
 			result = false;
 		}};
-		boolean actual = sut.insertApply(null);
+		boolean actual = sut.insertApplyInfo(null);
 		assertThat(actual, is(false));
 	}
 	
-	/**
-	 * insertされたIDを取得するメソッドのテスト
-	 * @throws Exception
-	 */
-	@Test
-	public void testSerchLastInsertId() throws Exception {
-		new Expectations() {{
-			mockDao.lastInsertId();
-			result = anyString;
-		}};
-		String actual = sut.lastInsertId();
-		assertThat(actual, is(""));
-	}
-	
-	/**
-	 * course_applyテーブルへ希望講座を登録するinsertメソッドのテスト
-	 * DB接続成功時
-	 */
-	@Test
-	public void testInsertCourseApplySuccess() {
-		new Expectations() {{
-			mockDao.insertCourseApply(anyString, (String[])any);
-			result = true;
-		}};
-		String[] any = {"6565", "0098"};
-		boolean actual = sut.insertCourseApply("22", any);
-		assertThat(actual, is(true));
-	}
-	
-	/**
-	 * course_applyテーブルへ希望講座を登録するinsertメソッドのテスト
-	 * DB接続失敗時
-	 */
-	@Test
-	public void testInsertCourseApplyFailure() {
-		new Expectations() {{
-			mockDao.insertCourseApply(anyString, (String[])any);
-			result = false;
-		}};
-		boolean actual = sut.insertCourseApply(null, null);
-		assertThat(actual, is(false));
-	}
 }

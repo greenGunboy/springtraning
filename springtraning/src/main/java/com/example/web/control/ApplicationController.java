@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -86,7 +85,7 @@ public class ApplicationController {
 	@RequestMapping("/course/input")
 	public String menuToinputPage(Model model) throws Exception {
 		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
-		List<CourseInfo> list = service.serchCourseInfo();
+		List<CourseInfo> list = service.searchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
 		return "course/input";
@@ -96,7 +95,7 @@ public class ApplicationController {
 	public String inputToconfPage(@Validated @ModelAttribute("applicationForm") ApplicationForm form, 
 			BindingResult result, Model model) throws Exception {
 		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
-		List<CourseInfo> list = service.serchCourseInfo();
+		List<CourseInfo> list = service.searchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
 		// 「生年月日」の未記入チェック
@@ -121,21 +120,32 @@ public class ApplicationController {
 	public String confToinputPage(@ModelAttribute("applicationForm") ApplicationForm form, 
 			Model model) throws Exception {
 		// 希望講座に表示する5件の講座一覧を取得しmodelにセット
-		List<CourseInfo> list = service.serchCourseInfo();
+		List<CourseInfo> list = service.searchCourseInfo();
 		model.addAttribute("courseInfo", list);
 		
 		return "course/input";
 	}
 	
-	@Transactional
+	//TODO Serviceのメソッドに付ける
+	// Controllerは画面遷移を担うレイヤなので、
+	// DB寄りのTransaction処理は、Serviceレイヤへ移管する
+//	@Transactional
 	@RequestMapping(value="/course/end", params="apply")
 	public String confToendPage(ApplicationForm form) {
+	// @Transactionの移管に伴い、ここから
 		// 利用者情報をapplicationテーブルへinsert
-		service.insertApply(form);
+//		service.insertApply(form);
 		// 上記でinsertされたprimary keyを取得
-		String id = service.lastInsertId();
+//		String id = service.lastInsertId();
 		// 利用者IDとその利用者が申込んだ講座をcourse_appplyテーブルへinsert
-		service.insertCourseApply(id, form.getApplyCourse());
-		return "course/end";
+//		service.insertCourseApply(id, form.getApplyCourse());
+	// ここまでを１つのServiceメソッド化する
+		
+		boolean flg = service.insertApplyInfo(form);
+		if(flg){
+			return "course/end";
+		} else {
+			return "course/error";
+		}
 	}
 }
