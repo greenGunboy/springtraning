@@ -9,7 +9,7 @@
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.total.editconf}"></span></h1>
 		<h3 class="blue">講座情報の修正内容を確認してください。</h3>
-		<form th:action="@{/total/editend}" th:object="${loginForm}" method="post">
+		<form th:action="@{/total/editend}" th:object="${configForm}" method="post">
 			<table>
 				<tr>
 					<td class="blue"><span th:text="#{label.courseno}"></span></td>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -83,7 +84,17 @@ public class CourseController {
 	
 	// menu.htmlでの「講座修正削除」ボタン押下時処理
 	@RequestMapping(value = "/admin/input", params="courseedit")
-	public String editPage(@ModelAttribute("configForm") ConfigForm form) {
+	public String editPage(@ModelAttribute("configForm") ConfigForm form, Model model) {
+		
+		
+		List<String> yearList = new ArrayList<String>();
+		int cal = Calendar.getInstance().get(Calendar.YEAR);
+		for (int i =cal-5; i<= cal+5; i++) {
+			yearList.add(String.valueOf(i));
+		}
+		model.addAttribute("yearList", yearList);
+		
+		
 		return "total/input";
 	}
 	

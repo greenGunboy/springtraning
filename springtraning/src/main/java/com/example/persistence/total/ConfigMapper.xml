@@ -4,19 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.persistence.total.ConfigMapper">
+
     <insert id="insertLoginInfo">
         INSERT INTO course_user (userid, passwd, inpdate) 
         VALUES (#{userid}, #{passwd}, CURRENT_DATE())
     </insert>
     
-    <select id="getCourseInfo" resultType="HashMap">
-    	SELECT courseno, coursename, thedate, starttime, endtime, vacantseats, now() FROM course 
+    <select id="getCourseInfo" resultType="com.example.domain.total.SearchCourseInfo">
+    	<bind name="cNoLike" value="'%' + courseno + '%'" />
+    	<bind name="cNameLike" value="'%' + coursename + '%'" />
+    	SELECT courseno, coursename, thedate, starttime, endtime, vacantseats, now() AS nowtime FROM course  
     	 <where>
             <if test="courseno != ''">
-                courseno LIKE #{courseno}
+                courseno LIKE #{cNoLike}
             </if>
             <if test="coursename != ''">
-                AND coursename LIKE #{coursename}
+                AND coursename LIKE #{cNameLike}
             </if>
             <if test="year != ''">
                 AND DATE_FORMAT(thedate, '%Y') = #{year}
@@ -39,25 +42,36 @@
             <if test="endmin != ''">
                 AND substring(endtime, 4, 2) = #{endmin}
             </if>
-            <if test="minvacantseats!= null">
+            <if test="minvacantseats!= ''">
                 <![CDATA[ AND vacantseats >= #{minvacantseats} ]]>
             </if>
-            <if test="maxvacantseats!= null">
+            <if test="maxvacantseats!= ''">
                 <![CDATA[ AND vacantseats <= #{maxvacantseats} ]]>
             </if>
-            <if test="state = 'end'">
+            <if test="state == 'end'">
                 <![CDATA[ AND REPLACE(CONCAT(thedate), '-', '') < CURRENT_DATE() + 0 ]]>
             </if>
-            <if test="state = 'session'">
+            <if test="state == 'session'">
                 <![CDATA[ AND REPLACE(CONCAT(thedate), '-', '') = CURRENT_DATE() + 0 ]]>
             </if>
-            <if test="state = 'plan'">
+            <if test="state == 'plan'">
                 <![CDATA[ AND REPLACE(CONCAT(thedate), '-', '') > CURRENT_DATE() + 0 ]]>
             </if>
         </where>
     </select>
     
-    <select id="searchIsExistUserID" resultType="boolean">
-    	SELECT userid FROM course_user WHERE userid = #{userid}
-    </select>
+    <delete id="deleteCourseInfoFromcourse_apply" >
+    	DELETE FROM course_apply WHERE courseno = #{courseno}
+    </delete>
+    
+    <delete id="deleteCourseInfoFromcourse" >
+    	DELETE FROM course WHERE courseno = #{courseno}
+    </delete>
+    
+    <update id="updateCourseInfo">
+    	UPDATE course 
+    	SET coursename = #{coursename}, thedate = #{thedate}, vacantseats = #{vacantseats}, starttime = #{starttime}, endtime = #{endtime}, upddate = now() 
+    	WHERE courseno = #{courseno}
+    </update>
+    
 </mapper>

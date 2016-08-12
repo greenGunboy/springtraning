@@ -8,8 +8,9 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.total.conf}"></span></h1>
-		<form th:action="@{/total/config}" th:object="${loginForm}" method="post">
-			<table border="1">
+		<form th:action="@{/total/config}" th:object="${configForm}" method="post">
+			<h3 th:if="${#lists.isEmpty(courseInfo)}">検索条件に一致する講座がありませんでした</h3>
+			<table border="1"  th:if="${not #lists.isEmpty(courseInfo)}">
 				<tr>
 					<th>講座番号</th>
 					<th>講座名</th>
@@ -19,18 +20,34 @@
 					<th></th>
 				</tr>
 				<tr th:each="courseInfo : ${courseInfo}">
-					<td th:text="${courseInfo.courseno}"></td>
-					<td th:text="${courseInfo.coursename}"></td>
-					<td>
-						<span th:text="${#dates.format(courseInfo.thedate, 'yyyy年MMM月dd日 (E)')}"></span>
-						<span th:text="${courseInfo.starttime}"></span>-<span th:text="${courseInfo.endtime}"></span>
-					</td>
-					<td th:text="${courseInfo.vacantseats}"></td>
-					<td th:text="${courseInfo.state}"></td>
-					<td>
-						<input type="submit" class="btn" name="edit" value="修正" />
-						<input type="submit" class="btn" name="delete" value="削除" />
-					</td>
+					<form th:action="@{/total/config}" th:object="${configForm}" method="post">
+						<td>
+							<span th:text="${courseInfo.courseno}" ></span>
+							<input type="hidden" th:value="${courseInfo.courseno}" th:attr="name='courseno'"/>
+						</td>
+						<td>
+							<span th:text="${courseInfo.coursename}"></span>
+							<input type="hidden" th:value="${courseInfo.coursename}" th:attr="name='coursename'"/>
+						</td>
+						<td>
+							<span th:text="${#dates.format(courseInfo.thedate, 'yyyy年MMM月dd日 (E)')}"></span>
+							<span th:text="${courseInfo.starttime}"></span>-<span th:text="${courseInfo.endtime}"></span>
+							<input type="hidden" th:value="${courseInfo.thedate}" th:attr="name='thedate'"/>
+							<input type="hidden" th:value="${courseInfo.starttime}" th:attr="name='starttime'"/>
+							<input type="hidden" th:value="${courseInfo.endtime}" th:attr="name='endtime'"/>
+						</td>
+						<td>
+							<span th:text="${courseInfo.vacantseats}"></span>
+							<input type="hidden" th:value="${courseInfo.vacantseats}" th:attr="name='vacantseats'"/>
+						</td>
+						<td>
+							<span th:text="${courseInfo.state}"></span>
+						</td>
+						<td>
+							<input type="submit" class="mbtn" name="edit" value="修正" />
+							<input type="submit" class="mbtn" name="delete" value="削除" />
+						</td>
+					</form>
 				</tr>
 			</table>
 			<br />

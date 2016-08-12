@@ -7,10 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.admin.CourseInfo;
+import com.example.domain.total.SearchCourseInfo;
 import com.example.service.total.CourseEditService;
 
 @Controller
@@ -26,7 +28,7 @@ public class ConfigController {
 	public List<String> setYear() {
 		List<String> yearList = new ArrayList<String>();
 		int cal = Calendar.getInstance().get(Calendar.YEAR);
-		for (int i =cal-65; i<= cal-18; i++) {
+		for (int i =cal-5; i<= cal+5; i++) {
 			yearList.add(String.valueOf(i));
 		}
 		return yearList;
@@ -75,53 +77,119 @@ public class ConfigController {
 		return new ConfigForm();
 	}
 	
+	
+	/** 講座検索画面 **/
 	@RequestMapping("total/conf")
 	public String inputToMenuPage(@ModelAttribute("configForm") ConfigForm form, 
 			Model model) throws Exception {
-		form.getState();
-		List<CourseInfo> list = service.getCourseInfo(form);
+		List<SearchCourseInfo> list = service.getCourseInfo(form);
 		model.addAttribute("courseInfo", list);
 		return "total/conf";
 	}
 	
+	
+	/** 講座一覧画面 **/
+	// 「修正」ボタン押下時
 	@RequestMapping(value="total/config", params="edit")
-	public String editPage() {
+	public String editPage(@ModelAttribute("configForm") ConfigForm form) {
 		return "total/editinput";
 	}
+	// 「削除」ボタン押下時
 	@RequestMapping(value="total/config", params="delete")
-	public String deletePage() {
+	public String deletePage(@ModelAttribute("configForm") ConfigForm form) {
 		return "total/deleteconf";
 	}
+	// 「講座検索」ボタン押下時
 	@RequestMapping(value="total/config", params="search")
 	public String searchPage() {
 		return "total/input";
 	}
 	
+	
+	/** 削除確認画面 **/
+	// 「戻る」ボタン押下時
+	@RequestMapping(value="total/deleteend", params="back")
+	public String backFromDeletePage() {
+		return "total/conf";
+	}
+	// 「削除」ボタン押下時
+	@RequestMapping(value="total/deleteend", params="delete")
+	public String confTodeletePage(@ModelAttribute("configForm") ConfigForm form) {
+		service.deleteCourseInfo(form);
+		return "total/deleteend";
+	}
+	
+	
+	/** 講座修正画面 **/
+	// 「戻る」ボタン押下時
+	@RequestMapping(value="total/editconf", params="back")
+	public String backToConfigPage() {
+		return "total/conf";
+	}
+	// 「確認」ボタン押下時
+	@RequestMapping(value="total/editconf", params="confirm")
+	public String inputToEditConfPage(@Validated @ModelAttribute("configForm") ConfigForm form, 
+			BindingResult result, Model model) {
+		
+		//　「講座開催日」の「年」「月」「日」の未記入チェック
+		if(form.getYear().equals("") || form.getMonth().equals("") || form.getDay().equals("")) {
+			result.reject("errors.required.date");
+		}
+		// 「開始時刻」の「時」「分」の未記入チェック
+		if(form.getSthour().equals("") || form.getStmin().equals("")) {
+			result.reject("errors.required.stime");
+		}
+		// 「終了時刻」の「時」「分」の未記入チェック
+		if(form.getEndhour().equals("") || form.getEndmin().equals("")) {
+			result.reject("errors.required.etime");
+		}
+		// 「開始時刻」が「終了時刻」より後ではないかチェック
+		if(!form.getSthour().equals("") && !form.getStmin().equals("") && !form.getEndhour().equals("") && !form.getEndmin().equals("")) {
+			if(Integer.parseInt(form.getSthour() + form.getStmin()) >= Integer.parseInt(form.getEndhour() + form.getEndmin())) {
+				result.reject("errors.contradiction.time");
+			}
+		}
+		if(result.hasErrors()) {
+			return "total/editinput";
+		}
+		return "total/editconf";
+	}
+	
+	
+	/** 修正確認画面 **/
+	// 「戻る」ボタン押下時
 	@RequestMapping(value="total/editend", params="back")
-	public String inputTobackPage() {
+	public String inputTobackPage(@ModelAttribute("configForm") ConfigForm form) {
 		return "total/editinput";
 	}
+	// 「修正」ボタン押下時
 	@RequestMapping(value="total/editend", params="edit")
-	public String inputToConfPage() {
+	public String inputToConfPage(@ModelAttribute("configForm") ConfigForm form) {
+		service.updateCourseInfo(form);
 		return "total/editend";
 	}
 	
+	
+	/** 削除完了、および修正完了画面 **/
+	// 「講座管理メニュー」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="menu")
 	public String topPage() {
-		return "total/editend";
+		return "admin/menu";
 	}
+	// 「講座検索」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="search")
-	public String toSearchPage() {
-		return "total/editend";
+	public String toSearchPage(@ModelAttribute("configForm") ConfigForm form, 
+			Model model) throws Exception {
+		return "total/input";
 	}
+	// 「講座一覧」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="courseList")
 	public String courseListPage() {
-		return "total/editend";
+		return "total/conf";
 	}
+	// 「ログアウト」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="logout")
 	public String logout() {
-		return "total/editend";
+		return "login/login";
 	}
-	
-	
 }

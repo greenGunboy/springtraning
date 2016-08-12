@@ -9,7 +9,7 @@
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.total.deleteconf}"></span></h1>
 		<h3 class="blue">削除する講座情報を確認してください。</h3>
-		<form th:action="@{/total/deleteend}" th:object="${loginForm}" method="post">
+		<form th:action="@{/total/deleteend}" th:object="${configForm}" method="post">
 			<table>
 				<tr>
 					<td class="blue"><span th:text="#{label.courseno}"></span></td>

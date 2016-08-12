@@ -8,7 +8,7 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.total.editinput}"></span></h1>
-		<form th:action="@{/total/editconf}" th:object="${loginForm}" method="post">
+		<form th:action="@{/total/editconf}" th:object="${configForm}" method="post">
 			<table>
 				<tr>
 					<td colspan="4">
@@ -17,15 +17,18 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.courseno}" class="blue"></span>　<span class="red">※</span></td>
-					<td><span th:text="${courseno}" ></span></td>
+					<td class="blue"><span th:text="#{label.courseno}" class="blue"></span></td>
+					<td>
+						<span th:text="*{courseno}" ></span>
+						<input type="hidden" th:field="*{courseno}"	/>
+					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.coursename}" class="blue"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.coursename}" class="blue"></span></td>
 					<td><input type="text" maxlength="40" th:field="*{coursename}" th:errorclass = "error-input" /></td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.thedate}" class="blue"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.thedate}" class="blue"></span></td>
 					<td>
 						<select th:field="*{year}">
 							<option value=""></option>
@@ -42,7 +45,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.starttime}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.starttime}"></span></td>
 					<td>
 						<select th:field="*{sthour}">
 							<option value=""></option>
@@ -55,7 +58,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.endtime}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.endtime}"></span></td>
 					<td>
 						<select th:field="*{endhour}">
 							<option value=""></option>
@@ -68,15 +71,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="blue"><span th:text="#{label.vacantseats}"></span>　<span class="red">※</span></td>
+					<td class="blue"><span th:text="#{label.vacantseats}"></span></td>
 					<td>
 						<input type="text" th:field="*{vacantseats}" th:errorclass = "error-input" /><span th:text="#{label.person}" class="blue"></span>
 					</td>
 				</tr>
 			</table>
 			<br />
-			<input type="submit" class="btn" name="back" value="戻る" /><br />
-			<br />
+			<input type="submit" class="btn" name="back" value="戻る" />
 			<input type="submit" class="btn" name="confirm" value="確認" />
 		</form>
 	</div>
