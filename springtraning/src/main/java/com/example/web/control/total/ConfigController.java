@@ -82,7 +82,9 @@ public class ConfigController {
 	@RequestMapping("total/conf")
 	public String inputToMenuPage(@ModelAttribute("configForm") ConfigForm form, 
 			Model model) throws Exception {
+		System.out.println(form.getCoursename());
 		List<SearchCourseInfo> list = service.getCourseInfo(form);
+		model.addAttribute("search", form);
 		model.addAttribute("courseInfo", list);
 		return "total/conf";
 	}
@@ -184,7 +186,12 @@ public class ConfigController {
 	}
 	// 「講座一覧」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="courseList")
-	public String courseListPage() {
+	public String courseListPage(@ModelAttribute("configForm") ConfigForm form, 
+			Model model) throws Exception {
+		
+		System.out.println(form.getCourseno());
+		List<SearchCourseInfo> list = service.getCourseInfo(form);
+		model.addAttribute("courseInfo", list);
 		return "total/conf";
 	}
 	// 「ログアウト」ボタン押下時

@@ -69,7 +69,7 @@ public class CourseEditService {
 			dao.deleteCourseInfoFromcourse_apply(form);
 			dao.deleteCourseInfoFromcourse(form);
 			return true;
-		} catch(Exception e) {
+		} catch(NullPointerException e){
 			return false;
 		}
 	}
