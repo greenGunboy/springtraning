@@ -69,18 +69,18 @@ public class TotalLoginSelenium {
     driver.findElement(By.id("passwd")).clear();
     driver.findElement(By.id("passwd")).sendKeys("tsubasa");
     
-    // ユーザ登録入力完了画面をエビデンス
+    // ユーザ登録情報入力完了画面をエビデンス
     file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file, new File("totalCapture/complete/logininputFill.png"));
     
-    // 「確認」ボタン押下
+    // 「確認」ボタン押下（total/loginconf.htmlへ遷移）
     driver.findElement(By.name("confirm")).click();
     
     // ユーザ登録確認画面をエビデンス
     file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file, new File("totalCapture/complete/loginconf.png"));
     
-    // 「登録」ボタン押下
+    // 「登録」ボタン押下（total/loginend.htmlへ遷移）
     driver.findElement(By.cssSelector("input.btn")).click();
     
     // ユーザ登録完了画面をエビデンス
@@ -109,7 +109,7 @@ public class TotalLoginSelenium {
     driver.findElement(By.id("passwd")).clear();
     driver.findElement(By.id("passwd")).sendKeys("tsubasa");
     
-    // ユーザログイン入力完了画面をエビデンス
+    // ユーザログイン情報入力完了画面をエビデンス
     file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file, new File("totalCapture/testRequiredLoginID/loginFill.png"));
     
@@ -142,7 +142,7 @@ public class TotalLoginSelenium {
     driver.findElement(By.id("passwd")).clear();
     driver.findElement(By.id("passwd")).sendKeys("");
     
-    // ユーザログイン入力完了画面をエビデンス
+    // ユーザログイン情報入力完了画面をエビデンス
     file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(file, new File("totalCapture/testRequiredPasswd/loginFill.png"));
     

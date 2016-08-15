@@ -32,28 +32,28 @@ public class CourseEditService {
 		List<SearchCourseInfo> list = dao.getCourseInfo(form);
 		String DATE_PATTERN ="yyyy-MM-dd";
 		
-		for(SearchCourseInfo a: list){
+		for(SearchCourseInfo courseInfo : list){
 			// 講座開催日の日時
-			String CourseDate = (new SimpleDateFormat(DATE_PATTERN)).format(a.getThedate());
+			String CourseDate = (new SimpleDateFormat(DATE_PATTERN)).format(courseInfo.getThedate());
 			String[] courseDate = (CourseDate.split("-"));
 			String year = courseDate[0];
 			String month = courseDate[1];
 			String day = courseDate[2];
 			
 			// 現在日時
-			String NowDate = (new SimpleDateFormat(DATE_PATTERN)).format(a.getNowtime());
+			String NowDate = (new SimpleDateFormat(DATE_PATTERN)).format(courseInfo.getNowtime());
 			String[] nowDate = NowDate.split("-");
-			String nyear = nowDate[0];
-			String nmonth = nowDate[1];
-			String nday = nowDate[2];
+			String nYear = nowDate[0];
+			String nMonth = nowDate[1];
+			String nDay = nowDate[2];
 
 			// 日付を比較
-			if (Integer.parseInt(nyear + nmonth + nday) > Integer.parseInt(year + month + day)) {
-				a.setState("終了");
-			} else if (Integer.parseInt(nyear + nmonth + nday) < Integer.parseInt(year + month + day)) {
-				a.setState("開催予定");
-			} else if (Integer.parseInt(year + month + day) == Integer.parseInt(nyear + nmonth + nday)) {
-				a.setState("開催中");
+			if (Integer.parseInt(nYear + nMonth + nDay) > Integer.parseInt(year + month + day)) {
+				courseInfo.setState("終了");
+			} else if (Integer.parseInt(nYear + nMonth + nDay) < Integer.parseInt(year + month + day)) {
+				courseInfo.setState("開催予定");
+			} else if (Integer.parseInt(year + month + day) == Integer.parseInt(nYear + nMonth + nDay)) {
+				courseInfo.setState("開催中");
 			}
 		}
 		return list;
@@ -68,7 +68,7 @@ public class CourseEditService {
 	public boolean deleteCourseInfo(ConfigForm form) {
 		boolean deleteCourseApply_flg = dao.deleteCourseInfoFromcourse_apply(form);
 		boolean deleteCourse_flg = dao.deleteCourseInfoFromcourse(form);
-		if(deleteCourseApply_flg || deleteCourse_flg){
+		if(deleteCourseApply_flg && deleteCourse_flg){
 			return true;
 		} else {
 			return false;

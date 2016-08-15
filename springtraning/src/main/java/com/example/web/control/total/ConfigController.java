@@ -89,7 +89,25 @@ public class ConfigController {
 	/** 講座検索画面 **/
 	@RequestMapping("total/conf")
 	public String inputToMenuPage(@ModelAttribute("searchForm") SearchForm form, 
-			Model model) throws Exception {
+			BindingResult result, Model model) throws Exception {
+		
+		// 「定員」の形式チェック。数字ではない場合、前画面へ遷移させる
+		if(!form.getMaxvacantseats().equals("")){
+			try{
+				Integer.parseInt(form.getMaxvacantseats());
+			} catch(NumberFormatException e) {
+				result.reject("errors.format.vacantseats");
+				return "total/input";
+			}
+		}
+		if(!form.getMinvacantseats().equals("")){
+			try{
+				Integer.parseInt(form.getMinvacantseats());
+			} catch(NumberFormatException e) {
+				result.reject("errors.format.vacantseats");
+				return "total/input";
+			}
+		}
 		
 		// 入力された検索条件で講座情報を読み込み一覧表示
 		List<SearchCourseInfo> list = service.getCourseInfo(form);
@@ -116,10 +134,15 @@ public class ConfigController {
 	}
 	
 	
-	/** 削除確認画面 **/
+	/** 削除確認画面 
+	 * @throws Exception **/
 	// 「戻る」ボタン押下時
 	@RequestMapping(value="total/deleteend", params="back")
-	public String backFromDeletePage() {
+	public String backFromDeletePage(@ModelAttribute("searchForm") SearchForm form, 
+			Model model) throws Exception {
+		// 入力された検索条件で講座情報を読み込み一覧表示
+		List<SearchCourseInfo> list = service.getCourseInfo(form);
+		model.addAttribute("courseInfo", list);
 		return "total/conf";
 	}
 	// 「削除」ボタン押下時
@@ -166,10 +189,15 @@ public class ConfigController {
 	}
 	
 	
-	/** 修正確認画面 **/
+	/** 修正確認画面 
+	 * @throws Exception **/
 	// 「戻る」ボタン押下時
 	@RequestMapping(value="total/editend", params="back")
-	public String inputTobackPage(@ModelAttribute("configForm") ConfigForm form) {
+	public String inputTobackPage(@ModelAttribute("searchForm") SearchForm form, 
+			Model model) throws Exception {
+		// 入力された検索条件で講座情報を読み込み一覧表示
+		List<SearchCourseInfo> list = service.getCourseInfo(form);
+		model.addAttribute("courseInfo", list);
 		return "total/editinput";
 	}
 	// 「修正」ボタン押下時

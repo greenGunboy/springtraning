@@ -8,8 +8,14 @@
 <body>
 	<div class="box">
 		<h1 class="blue"><span th:text="#{title.total.input}"></span></h1>
-		<form th:action="@{/total/conf}" th:object="${configForm}" method="post">
+		<form th:action="@{/total/conf}" th:object="${searchForm}" method="post">
 			<table>
+				<tr>
+					<td colspan="4">
+						<p th:if = "${#fields.hasErrors('all')}"></p>
+						<p th:errors = "*{all}" class = "error-message">error!</p>
+					</td>
+				</tr>
 				<tr>
 					<td class="blue"><span th:text="#{label.courseno}" class="blue"></span></td>
 					<td><input type="text" maxlength="4" th:field="*{courseno}" th:value="*{courseno}" /></td>

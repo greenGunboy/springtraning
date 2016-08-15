@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.service.admin.CourseResisterService;
-import com.example.web.control.total.ConfigForm;
+import com.example.web.control.total.SearchForm;
 
 @Controller
 public class CourseController {
@@ -84,8 +84,7 @@ public class CourseController {
 	
 	// menu.htmlでの「講座修正削除」ボタン押下時処理
 	@RequestMapping(value = "/admin/input", params="courseedit")
-	public String editPage(@ModelAttribute("configForm") ConfigForm form, Model model) {
-		
+	public String editPage(@ModelAttribute("searchForm") SearchForm form, Model model) {
 		
 		List<String> yearList = new ArrayList<String>();
 		int cal = Calendar.getInstance().get(Calendar.YEAR);
@@ -93,8 +92,6 @@ public class CourseController {
 			yearList.add(String.valueOf(i));
 		}
 		model.addAttribute("yearList", yearList);
-		
-		
 		return "total/input";
 	}
 	

@@ -21,7 +21,7 @@ import mockit.Mocked;
 public class LoginApplyServiceTest {
 
 	@Autowired
-	private LoginApplyService sut;
+	private LoginApplyService LoginApplySVC;
 	
 	@Mocked
 	private LoginDao mockDao;
@@ -36,7 +36,7 @@ public class LoginApplyServiceTest {
 			mockDao.insertLoginInfo((LoginForm)any);
 			result = true;
 		}};
-		boolean actual = sut.insertLoginInfo(new LoginForm());
+		boolean actual = LoginApplySVC.insertLoginInfo(new LoginForm());
 		assertThat(actual, is(true));
 	}
 	
@@ -50,7 +50,7 @@ public class LoginApplyServiceTest {
 			mockDao.insertLoginInfo((LoginForm)any);
 			result = false;
 		}};
-		boolean actual = sut.insertLoginInfo(null);
+		boolean actual = LoginApplySVC.insertLoginInfo(null);
 		assertThat(actual, is(false));
 	}
 	
@@ -60,7 +60,7 @@ public class LoginApplyServiceTest {
 			mockDao.getUserInfo((LoginForm)any);
 			result = 1;
 		}};
-		int actual = sut.getUserInfo(new LoginForm());
+		int actual = LoginApplySVC.getUserInfo(new LoginForm());
 		assertThat(actual, is(1));
 	}
 	
@@ -70,7 +70,7 @@ public class LoginApplyServiceTest {
 			mockDao.getUserInfo((LoginForm)any);
 			result = -1;
 		}};
-		int actual = sut.getUserInfo(null);
+		int actual = LoginApplySVC.getUserInfo(null);
 		assertThat(actual, is(-1));
 	}
 	
@@ -80,7 +80,7 @@ public class LoginApplyServiceTest {
 			mockDao.searchIsExistUserID((LoginForm)any);
 			result = true;
 		}};
-		boolean actual = sut.searchIsExistUserID(new LoginForm());
+		boolean actual = LoginApplySVC.searchIsExistUserID(new LoginForm());
 		assertThat(actual, is(true));
 	}
 	
@@ -90,7 +90,7 @@ public class LoginApplyServiceTest {
 			mockDao.searchIsExistUserID((LoginForm)any);
 			result = false;
 		}};
-		boolean actual = sut.searchIsExistUserID(null);
+		boolean actual = LoginApplySVC.searchIsExistUserID(null);
 		assertThat(actual, is(false));
 	}
 	

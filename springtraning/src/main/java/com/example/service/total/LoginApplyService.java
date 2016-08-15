@@ -17,7 +17,6 @@ public class LoginApplyService {
 	 * @param form　入力されたログインデータ
 	 */
 	public boolean insertLoginInfo(LoginForm form) {
-		
 		return dao.insertLoginInfo(form);
 	}
 	
