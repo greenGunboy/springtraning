@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.domain.total.SearchCourseInfo;
 import com.example.service.total.CourseEditService;
 
 @Controller
+@SessionAttributes(types = SearchForm.class)
 public class ConfigController {
 
 	@Autowired
@@ -71,20 +73,26 @@ public class ConfigController {
 	}
 /************************************************************/
 	
-	
+	// 修正削除用form
 	@ModelAttribute("configForm")
 	public ConfigForm setForm() {
 		return new ConfigForm();
 	}
 	
+	// 検索用form
+	@ModelAttribute("searchForm")
+	public SearchForm setSearchForm() {
+		return new SearchForm();
+	}
+	
 	
 	/** 講座検索画面 **/
 	@RequestMapping("total/conf")
-	public String inputToMenuPage(@ModelAttribute("configForm") ConfigForm form, 
+	public String inputToMenuPage(@ModelAttribute("searchForm") SearchForm form, 
 			Model model) throws Exception {
-		System.out.println(form.getCoursename());
+		
+		// 入力された検索条件で講座情報を読み込み一覧表示
 		List<SearchCourseInfo> list = service.getCourseInfo(form);
-		model.addAttribute("search", form);
 		model.addAttribute("courseInfo", list);
 		return "total/conf";
 	}
@@ -131,7 +139,7 @@ public class ConfigController {
 	// 「確認」ボタン押下時
 	@RequestMapping(value="total/editconf", params="confirm")
 	public String inputToEditConfPage(@Validated @ModelAttribute("configForm") ConfigForm form, 
-			BindingResult result, Model model) {
+			BindingResult result) {
 		
 		//　「講座開催日」の「年」「月」「日」の未記入チェック
 		if(form.getYear().equals("") || form.getMonth().equals("") || form.getDay().equals("")) {
@@ -171,7 +179,7 @@ public class ConfigController {
 		return "total/editend";
 	}
 	
-	
+
 	/** 削除完了、および修正完了画面 **/
 	// 「講座管理メニュー」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="menu")
@@ -180,16 +188,15 @@ public class ConfigController {
 	}
 	// 「講座検索」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="search")
-	public String toSearchPage(@ModelAttribute("configForm") ConfigForm form, 
-			Model model) throws Exception {
+	public String toSearchPage() {
 		return "total/input";
 	}
 	// 「講座一覧」ボタン押下時
 	@RequestMapping(value="total/configmenu", params="courseList")
-	public String courseListPage(@ModelAttribute("configForm") ConfigForm form, 
+	public String courseListPage(@ModelAttribute("searchForm") SearchForm form, 
 			Model model) throws Exception {
 		
-		System.out.println(form.getCourseno());
+		// 入力された検索条件で講座情報を読み込み一覧表示
 		List<SearchCourseInfo> list = service.getCourseInfo(form);
 		model.addAttribute("courseInfo", list);
 		return "total/conf";

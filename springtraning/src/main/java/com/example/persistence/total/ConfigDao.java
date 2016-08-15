@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.domain.total.SearchCourseInfo;
 import com.example.domain.total.UpdateCourseInfo;
 import com.example.web.control.total.ConfigForm;
+import com.example.web.control.total.SearchForm;
 
 @Repository
 public class ConfigDao {
@@ -28,7 +29,7 @@ public class ConfigDao {
 	 * @param form 入力された検索情報
 	 * @return
 	 */
-	public List<SearchCourseInfo> getCourseInfo(ConfigForm form) {
+	public List<SearchCourseInfo> getCourseInfo(SearchForm form) {
 		return mapper.getCourseInfo(form);
 	}
 	

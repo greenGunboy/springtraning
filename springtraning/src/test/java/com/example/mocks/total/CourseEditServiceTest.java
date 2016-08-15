@@ -17,6 +17,7 @@ import com.example.domain.total.UpdateCourseInfo;
 import com.example.persistence.total.ConfigDao;
 import com.example.service.total.CourseEditService;
 import com.example.web.control.total.ConfigForm;
+import com.example.web.control.total.SearchForm;
 
 import mockit.Expectations;
 import mockit.Mocked;
@@ -37,11 +38,11 @@ public class CourseEditServiceTest {
 	@Test
 	public void testGetCourseInfo() throws Exception {
 		new Expectations() {{
-			mockDao.getCourseInfo((ConfigForm)any);
+			mockDao.getCourseInfo((SearchForm)any);
 			result = new ArrayList<SearchCourseInfo>();
 		}};
-		List<SearchCourseInfo> actual = sut.getCourseInfo(new ConfigForm());
-		assertThat(actual, is(new ArrayList<ConfigForm>()));
+		List<SearchCourseInfo> actual = sut.getCourseInfo(new SearchForm());
+		assertThat(actual, is(new ArrayList<SearchForm>()));
 	}
 	
 	/**
@@ -66,6 +67,7 @@ public class CourseEditServiceTest {
 	public void testDeleteCourseInfoFailure() {
 		new Expectations() {{
 			mockDao.deleteCourseInfoFromcourse_apply((ConfigForm)any);
+			mockDao.deleteCourseInfoFromcourse((ConfigForm)any);
 			result = false;
 		}};
 		boolean actual = sut.deleteCourseInfo(null);
@@ -96,7 +98,7 @@ public class CourseEditServiceTest {
 			mockDao.updateCourseInfo((UpdateCourseInfo)any);
 			result = false;
 		}};
-		boolean actual = sut.updateCourseInfo(new ConfigForm());
+		boolean actual = sut.updateCourseInfo(null);
 		assertThat(actual, is(false));
 	}
 }

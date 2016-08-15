@@ -12,6 +12,7 @@ import com.example.domain.total.SearchCourseInfo;
 import com.example.domain.total.UpdateCourseInfo;
 import com.example.persistence.total.ConfigDao;
 import com.example.web.control.total.ConfigForm;
+import com.example.web.control.total.SearchForm;
 
 @Service
 public class CourseEditService {
@@ -25,7 +26,7 @@ public class CourseEditService {
 	 * @return 講座の検索結果
 	 * @throws Exception
 	 */
-	public List<SearchCourseInfo> getCourseInfo(ConfigForm form) throws Exception {
+	public List<SearchCourseInfo> getCourseInfo(SearchForm form) throws Exception {
 		
 		// 講座一覧の検索結果
 		List<SearchCourseInfo> list = dao.getCourseInfo(form);
@@ -65,11 +66,11 @@ public class CourseEditService {
 	 */
 	@Transactional
 	public boolean deleteCourseInfo(ConfigForm form) {
-		try {
-			dao.deleteCourseInfoFromcourse_apply(form);
-			dao.deleteCourseInfoFromcourse(form);
+		boolean deleteCourseApply_flg = dao.deleteCourseInfoFromcourse_apply(form);
+		boolean deleteCourse_flg = dao.deleteCourseInfoFromcourse(form);
+		if(deleteCourseApply_flg || deleteCourse_flg){
 			return true;
-		} catch(NullPointerException e){
+		} else {
 			return false;
 		}
 	}
@@ -77,12 +78,14 @@ public class CourseEditService {
 	/**
 	 * courseテーブルに存在する選択された講座情報を修正する
 	 * @param form 入力された講座の修正データ
-	 * @return
+	 * @return 修正完了時はtrue、完了しなかった場合はfalseを返す
 	 */
 	public boolean updateCourseInfo(ConfigForm form) {
 		// form内データをinfoへコピーし、updateのようのデータに編集
 		UpdateCourseInfo updCourseInfo = new UpdateCourseInfo();
-		BeanUtils.copyProperties(form, updCourseInfo);
+		if(form!=null){
+			BeanUtils.copyProperties(form, updCourseInfo);
+		}
 		boolean flg = dao.updateCourseInfo(updCourseInfo);
 		return flg;
 	}
